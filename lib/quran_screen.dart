@@ -14,9 +14,15 @@ class QuranScreen extends StatefulWidget {
 
   late int indexQ;
 
-  QuranScreen({required this.name, required this.index, super.key}) {
+  String elqarea;
+
+  late String elqareaQ;
+
+  QuranScreen({required this.name, required this.index,required this.elqarea, super.key}) {
     nameQ = name;
     indexQ = index;
+    elqareaQ= elqarea;
+
   }
 
   List<String> quranList = [
@@ -161,7 +167,7 @@ class _QuranScreenState extends State<QuranScreen> {
   void initState() {
     super.initState();
     // player = AudioPlayer()..setAsset('assets/quran/${widget.quranList[widget.indexQ]}.mp3');
-    player = AudioPlayer()..setUrl('https://server13.mp3quran.net/basit_mjwd/${widget.quranList[widget.indexQ]}.mp3');
+    player = AudioPlayer()..setUrl('https://server${widget.elqarea}/${widget.quranList[widget.indexQ]}.mp3');
   }
 
   @override

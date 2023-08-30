@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/el_quraa.dart';
 import 'package:quran_app/mushaf.dart';
-import 'package:quran_app/quran_list.dart';
 
 class FirstScreen extends StatelessWidget {
   @override
@@ -45,7 +45,7 @@ class FirstScreen extends StatelessWidget {
             InkWell(
               onTap: (){
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => QuranListView()));
+                    MaterialPageRoute(builder: (context) => ElQuraaScreen()));
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),

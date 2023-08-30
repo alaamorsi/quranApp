@@ -5,6 +5,7 @@ import 'package:quran_app/quran_screen.dart';
 
 class QuranListView extends StatelessWidget {
   var nameController = TextEditingController();
+  List elQuraaNames = ["عبدالباسط عبد الصمد","محمد صديق المنشاوي ","ياسر الدوسري"];
   List name = [
     'سورة الفاتحة',
     'سورة البقرة',
@@ -121,6 +122,11 @@ class QuranListView extends StatelessWidget {
     'سورة الفلق',
     'سورة الناس',
   ];
+  String elQuraa;
+  late String nameQ;
+  QuranListView({required this.elQuraa, super.key}) {
+    nameQ = elQuraa;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +182,7 @@ class QuranListView extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => QuranScreen(name: name[index],index: index,)));
+                MaterialPageRoute(builder: (context) => QuranScreen(name: name[index],index: index,elqarea: elQuraa,)));
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
