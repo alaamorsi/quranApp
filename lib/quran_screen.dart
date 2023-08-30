@@ -14,14 +14,19 @@ class QuranScreen extends StatefulWidget {
 
   late int indexQ;
 
+  String url;
+
+  late String urlQ;
+
   String elqarea;
 
   late String elqareaQ;
 
-  QuranScreen({required this.name, required this.index,required this.elqarea, super.key}) {
+  QuranScreen({required this.name, required this.index,required this.elqarea,required this.url, super.key}) {
     nameQ = name;
     indexQ = index;
     elqareaQ= elqarea;
+    urlQ=url;
 
   }
 
@@ -166,8 +171,7 @@ class _QuranScreenState extends State<QuranScreen> {
   @override
   void initState() {
     super.initState();
-    // player = AudioPlayer()..setAsset('assets/quran/${widget.quranList[widget.indexQ]}.mp3');
-    player = AudioPlayer()..setUrl('https://server${widget.elqarea}/${widget.quranList[widget.indexQ]}.mp3');
+    player = AudioPlayer()..setUrl('https://server${widget.url}/${widget.quranList[widget.indexQ]}.mp3');
   }
 
   @override
@@ -213,7 +217,7 @@ class _QuranScreenState extends State<QuranScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Text(
-                    'القارئ الشيخ عبدالباسط عبدالصمد',
+                    ' القارئ الشيخ ${widget.elqarea}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

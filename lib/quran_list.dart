@@ -122,10 +122,16 @@ class QuranListView extends StatelessWidget {
     'سورة الفلق',
     'سورة الناس',
   ];
-  String elQuraa;
+  String Qname;
   late String nameQ;
-  QuranListView({required this.elQuraa, super.key}) {
-    nameQ = elQuraa;
+
+  String elQuraa;
+
+  late String elQuraaQ;
+
+  QuranListView({required this.Qname,required this.elQuraa,  super.key}) {
+    nameQ = Qname;
+    elQuraaQ = elQuraa;
   }
 
   @override
@@ -182,7 +188,7 @@ class QuranListView extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => QuranScreen(name: name[index],index: index,elqarea: elQuraa,)));
+                MaterialPageRoute(builder: (context) => QuranScreen(name: name[index],index: index,elqarea: nameQ,url:elQuraaQ,)));
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),

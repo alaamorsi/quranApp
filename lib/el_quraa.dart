@@ -56,7 +56,7 @@ class ElQuraaScreen extends StatelessWidget {
   Widget buildElquraaItem(context , index) => InkWell(
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => QuranListView(elQuraa: url[index])));
+              MaterialPageRoute(builder: (context) => QuranListView(elQuraa: url[index],Qname: elQuraaNames[index],)));
         },
         child: Container(
           height: 250.0,
