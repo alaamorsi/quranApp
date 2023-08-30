@@ -160,7 +160,8 @@ class _QuranScreenState extends State<QuranScreen> {
   @override
   void initState() {
     super.initState();
-    player = AudioPlayer()..setAsset('assets/quran/${widget.quranList[widget.indexQ]}.mp3');
+    // player = AudioPlayer()..setAsset('assets/quran/${widget.quranList[widget.indexQ]}.mp3');
+    player = AudioPlayer()..setUrl('https://server13.mp3quran.net/basit_mjwd/${widget.quranList[widget.indexQ]}.mp3');
   }
 
   @override
