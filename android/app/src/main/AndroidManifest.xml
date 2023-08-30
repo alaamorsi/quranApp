@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="القرآن الكريم بصوت القارئ الشيخ عبدالباسط عبدالصمد بدون نت"
+        android:label="القرآن الكريم"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

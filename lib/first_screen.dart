@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/mushaf.dart';
 import 'package:quran_app/quran_list.dart';
 
 class FirstScreen extends StatelessWidget {
@@ -62,7 +63,7 @@ class FirstScreen extends StatelessWidget {
             InkWell(
               onTap: (){
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => QuranListView()));
+                    MaterialPageRoute(builder: (context) => MushafScreen()));
               },
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
