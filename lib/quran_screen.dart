@@ -180,8 +180,8 @@ class _QuranScreenState extends State<QuranScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.grey[800]!,
-              Colors.grey[400]!,
+              Colors.brown[200]!,
+              Colors.brown,
             ],
           ),
         ),
@@ -226,7 +226,7 @@ class _QuranScreenState extends State<QuranScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.0),
                       image: DecorationImage(
-                          image: AssetImage('assets/images/1_foreground.png')),
+                          image: AssetImage('assets/images/1.png'),fit: BoxFit.cover),
                     ),
                   ),
                 ),
