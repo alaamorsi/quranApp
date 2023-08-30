@@ -131,7 +131,7 @@ class QuranListView extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
         ),
         centerTitle: true,
-        backgroundColor: Colors.grey[700],
+        backgroundColor: Colors.brown.shade900,
         elevation: 0.0,
       ),
       body: Container(
@@ -141,8 +141,8 @@ class QuranListView extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.grey[800]!,
-              Colors.grey[400]!,
+              Colors.brown[200]!,
+              Colors.brown,
             ],
           ),
         ),
@@ -171,7 +171,7 @@ class QuranListView extends StatelessWidget {
 
   Widget buildListItem(context , index) => Container(
         decoration: BoxDecoration(
-          border: Border.all(),
+          borderRadius: BorderRadius.circular(20.0,),color: Colors.brown[800],
         ),
         child: InkWell(
           onTap: () {
