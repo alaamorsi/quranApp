@@ -36,7 +36,7 @@ class FirstScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
                     image: DecorationImage(
-                        image: AssetImage('assets/images/firstScreenImage.png')
+                        image: AssetImage('assets/AppImage.jpg')
                         ,fit: BoxFit.cover),
                   ),
               ),
