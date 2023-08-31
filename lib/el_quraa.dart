@@ -3,9 +3,31 @@ import 'package:quran_app/quran_list.dart';
 
 class ElQuraaScreen extends StatelessWidget {
   var nameController = TextEditingController();
-  List elQuraaimages = ['assets/images/1.png','assets/images/2.jpg','assets/images/3.jpg'];
-  List elQuraaNames = ["عبدالباسط عبد الصمد","محمد صديق المنشاوي ","ياسر الدوسري"];
-  List url =['13.mp3quran.net/basit_mjwd','10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad','10.mp3quran.net/minsh'];
+  List elQuraaimages = [
+    'assets/images/1.png',
+    'assets/images/2.jpg',
+    'assets/images/3.jpg',
+    'assets/images/4.jpg',
+    'assets/images/5.jpg',
+    'assets/images/7.jpg'
+  ];
+  List elQuraaNames = [
+    'عبدالباسط عبد الصمد',
+    'محمد صديق المنشاوي ',
+    'محمود علي البنا',
+    'محمود خليل الحصري',
+    'محمد أيوب',
+    'ياسر الدوسري'
+  ];
+  List url = [
+    '13.mp3quran.net/basit_mjwd',
+    '10.mp3quran.net/minsh',
+    '8.mp3quran.net/bna',
+    '13.mp3quran.net/husr',
+    '8.mp3quran.net/ayyub',
+    '11.mp3quran.net/yasser',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +41,7 @@ class ElQuraaScreen extends StatelessWidget {
         elevation: 0.0,
       ),
       body: Container(
+        height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -41,10 +64,12 @@ class ElQuraaScreen extends StatelessWidget {
                 ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context , index)=>buildElquraaItem(context , index),
-                    separatorBuilder: (context , index)=> SizedBox(height: 10.0,),
-                    itemCount: elQuraaNames.length
-                ),
+                    itemBuilder: (context, index) =>
+                        buildElquraaItem(context, index),
+                    separatorBuilder: (context, index) => SizedBox(
+                          height: 10.0,
+                        ),
+                    itemCount: elQuraaNames.length),
               ],
             ),
           ),
@@ -53,31 +78,39 @@ class ElQuraaScreen extends StatelessWidget {
     );
   }
 
-  Widget buildElquraaItem(context , index) => InkWell(
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => QuranListView(url: url[index],Alqarea: elQuraaNames[index],image: elQuraaimages[index],)));
-        },
-        child: Container(
-          height: 250.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0,),color: Colors.brown.shade800,),
-            child: Column(
-              children:
-              [
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Container(
-                    height: 200.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0,),
-                      image: DecorationImage(
-                          image: AssetImage(elQuraaimages[index]),fit: BoxFit.cover),),
-              ),
+  Widget buildElquraaItem(context, index) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            20.0,
+          ),
+          color: Colors.brown[800],
+        ),
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => QuranListView(
+                          url: url[index],
+                          Alqarea: elQuraaNames[index],
+                          image: elQuraaimages[index],
+                        )));
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.arrow_back),
+                Spacer(),
+                Text(
+                  elQuraaNames[index],
+                  style: TextStyle(color: Colors.white, fontSize: 22.0),
                 ),
-                Text(elQuraaNames[index],style: TextStyle(color: Colors.white, fontSize: 22.0)),
-          ]
-       ),
-    ),
-  );
+              ],
+            ),
+          ),
+        ),
+      );
 }
