@@ -214,14 +214,13 @@ class _QuranScreenState extends State<QuranScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
                     ' القارئ الشيخ ${widget.Alqarea}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    // overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 24.0,
+                        fontSize: 19.0,
                         fontWeight: FontWeight.w400),
                   ),
                 ),
