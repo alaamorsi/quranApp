@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
 
-class MushafScreen extends StatefulWidget {
-
-  @override
-  State<MushafScreen> createState() => _MushafScreenState();
-}
-
-class _MushafScreenState extends State<MushafScreen> {
+class MushafScreen extends StatelessWidget {
 
   final pdfController = PdfController(
     document: PdfDocument.openAsset('assets/Mushaf.pdf'),
@@ -15,24 +9,23 @@ class _MushafScreenState extends State<MushafScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.brown[200]!,
-              Colors.brown,
+              Colors.white54,
+              Colors.white60,
             ],
           ),
         ),
         width: double.infinity,
         height: double.infinity,
         child: PdfView(
+          reverse: true,
           controller: pdfController,
         ),
-      ),
-    );
+      );
   }
 }
