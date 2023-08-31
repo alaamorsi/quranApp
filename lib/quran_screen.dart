@@ -7,27 +7,26 @@ import 'package:rxdart/rxdart.dart';
 
 class QuranScreen extends StatefulWidget {
   String name;
-
   late String nameQ;
 
   int index;
-
   late int indexQ;
 
   String url;
-
   late String urlQ;
 
-  String elqarea;
+  String Alqarea;
+  late String AlqareaQ;
 
-  late String elqareaQ;
+  String image;
+  late String imageQ;
 
-  QuranScreen({required this.name, required this.index,required this.elqarea,required this.url, super.key}) {
+  QuranScreen({required this.name, required this.index,required this.Alqarea,required this.url,required this.image, super.key}) {
     nameQ = name;
     indexQ = index;
-    elqareaQ= elqarea;
+    AlqareaQ= Alqarea;
     urlQ=url;
-
+    imageQ=image;
   }
 
   List<String> quranList = [
@@ -217,7 +216,7 @@ class _QuranScreenState extends State<QuranScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Text(
-                    ' القارئ الشيخ ${widget.elqarea}',
+                    ' القارئ الشيخ ${widget.Alqarea}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -236,7 +235,7 @@ class _QuranScreenState extends State<QuranScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.0),
                       image: DecorationImage(
-                          image: AssetImage('assets/images/1.png'),fit: BoxFit.cover),
+                          image: AssetImage('${widget.image}'),fit: BoxFit.cover),
                     ),
                   ),
                 ),

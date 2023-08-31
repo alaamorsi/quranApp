@@ -5,7 +5,7 @@ class ElQuraaScreen extends StatelessWidget {
   var nameController = TextEditingController();
   List elQuraaimages = ['assets/images/1.png','assets/images/2.jpg','assets/images/3.jpg'];
   List elQuraaNames = ["عبدالباسط عبد الصمد","محمد صديق المنشاوي ","ياسر الدوسري"];
-  List url =['13.mp3quran.net/basit_mjwd','10.mp3quran.net/minsh','10.mp3quran.net/minsh'];
+  List url =['13.mp3quran.net/basit_mjwd','10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad','10.mp3quran.net/minsh'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +56,7 @@ class ElQuraaScreen extends StatelessWidget {
   Widget buildElquraaItem(context , index) => InkWell(
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => QuranListView(elQuraa: url[index],Qname: elQuraaNames[index],)));
+              MaterialPageRoute(builder: (context) => QuranListView(url: url[index],Alqarea: elQuraaNames[index],image: elQuraaimages[index],)));
         },
         child: Container(
           height: 250.0,
