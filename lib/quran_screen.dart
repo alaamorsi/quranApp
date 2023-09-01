@@ -234,7 +234,7 @@ class _QuranScreenState extends State<QuranScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.0),
                       image: DecorationImage(
-                          image: AssetImage('${widget.image}'),fit: BoxFit.cover),
+                          image: AssetImage('${widget.imageQ}'),fit: BoxFit.cover),
                     ),
                   ),
                 ),

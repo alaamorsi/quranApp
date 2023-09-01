@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:quran_app/quran_screen.dart';
 
 class QuranListView extends StatelessWidget {
-  var nameController = TextEditingController();
-  List elQuraaNames = ["عبدالباسط عبد الصمد","محمد صديق المنشاوي ","ياسر الدوسري"];
   List name = [
     'سورة الفاتحة',
     'سورة البقرة',

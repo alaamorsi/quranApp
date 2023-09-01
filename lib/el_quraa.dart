@@ -9,23 +9,50 @@ class ElQuraaScreen extends StatelessWidget {
     'assets/images/3.jpg',
     'assets/images/4.jpg',
     'assets/images/5.jpg',
-    'assets/images/7.jpg'
+    'assets/images/6.jpg',
+    'assets/images/7.jpg',
+    'assets/images/8.jpg',
+    'assets/images/9.jpg',
+    'assets/images/10.jpg',
+    'assets/images/11.jpg',
+    'assets/images/12.jpg',
+    'assets/images/13.jpg',
+    'assets/images/14.jpg',
+    'assets/images/15.jpg',
   ];
   List elQuraaNames = [
     'عبدالباسط عبد الصمد',
     'محمد صديق المنشاوي ',
+    'محمد رفعت',
     'محمود علي البنا',
     'محمود خليل الحصري',
     'محمد أيوب',
-    'ياسر الدوسري'
+    'فارس عباد',
+    'ناصر القطامي',
+    'ياسر الدوسري',
+    'ماهر المعيقلي',
+    'صلاح بو خاطر',
+    'أحمد العجمي',
+    'عبد الرحمن السديس',
+    'سعد الغامدي',
+    'مشاري راشد العفاسي',
   ];
   List url = [
     '13.mp3quran.net/basit_mjwd',
     '10.mp3quran.net/minsh',
+    '14.mp3quran.net/refat',
     '8.mp3quran.net/bna',
     '13.mp3quran.net/husr',
     '8.mp3quran.net/ayyub',
+    '8.mp3quran.net/frs_a',
+    '6.mp3quran.net/qtm',
     '11.mp3quran.net/yasser',
+    '12.mp3quran.net/maher',
+    '8.mp3quran.net/bu_khtr',
+    '10.mp3quran.net/ajm',
+    '11.mp3quran.net/sds',
+    '7.mp3quran.net/s_gmd',
+    '8.mp3quran.net/afs',
   ];
 
   @override
@@ -33,7 +60,7 @@ class ElQuraaScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'القرآن الكريم',
+          'القراء',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
         ),
         centerTitle: true,

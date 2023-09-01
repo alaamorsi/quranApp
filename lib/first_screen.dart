@@ -33,7 +33,7 @@ class FirstScreen extends StatelessWidget {
             //for the image
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 20.0),
-              child: Container(height: double.infinity,width: double.infinity,
+              child: Container(height: 300.0,width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
                     image: DecorationImage(
@@ -56,7 +56,7 @@ class FirstScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.brown[800],
                     borderRadius: BorderRadius.circular(25.0),),
-                  child: Center(child: Text('استمع للقرآن',style: TextStyle(color: Colors.white,fontSize: 22.0),)),
+                  child: Center(child: Text('الاستماع',style: TextStyle(color: Colors.white,fontSize: 22.0),)),
                 ),
               ),
             ),
@@ -74,7 +74,7 @@ class FirstScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.brown[800],
                     borderRadius: BorderRadius.circular(25.0),),
-                  child: Center(child: Text('قراءة القرآن',style: TextStyle(color: Colors.white,fontSize: 22.0),)),
+                  child: Center(child: Text('المصحف',style: TextStyle(color: Colors.white,fontSize: 22.0),)),
                 ),
               ),
             ),
