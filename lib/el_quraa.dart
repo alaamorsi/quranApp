@@ -23,7 +23,7 @@ class ElQuraaScreen extends StatelessWidget {
     'assets/images/17.jpg',
   ];
   List elQuraaNames = [
-    'عبدالباسط عبد الصمد',
+    'عبدالباسط عبدالصمد',
     'محمد صديق المنشاوي ',
     'محمد رفعت',
     'محمود علي البنا',
@@ -112,6 +112,7 @@ class ElQuraaScreen extends StatelessWidget {
   }
 
   Widget buildElquraaItem(context, index) => Container(
+        height: 50.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
             20.0,
@@ -141,6 +142,8 @@ class ElQuraaScreen extends StatelessWidget {
                   elQuraaNames[index],
                   style: TextStyle(color: Colors.white, fontSize: 22.0),
                 ),
+                SizedBox(width: 5.0,),
+                CircleAvatar(backgroundImage: AssetImage(elQuraaimages[index]),)
               ],
             ),
           ),
