@@ -21,12 +21,18 @@ class QuranScreen extends StatefulWidget {
   String image;
   late String imageQ;
 
-  QuranScreen({required this.name, required this.index,required this.Alqarea,required this.url,required this.image, super.key}) {
+  QuranScreen(
+      {required this.name,
+      required this.index,
+      required this.Alqarea,
+      required this.url,
+      required this.image,
+      super.key}) {
     nameQ = name;
     indexQ = index;
-    AlqareaQ= Alqarea;
-    urlQ=url;
-    imageQ=image;
+    AlqareaQ = Alqarea;
+    urlQ = url;
+    imageQ = image;
   }
 
   List<String> quranList = [
@@ -170,7 +176,14 @@ class _QuranScreenState extends State<QuranScreen> {
   @override
   void initState() {
     super.initState();
-    player = AudioPlayer()..setUrl('https://server${widget.url}/${widget.quranList[widget.indexQ]}.mp3');
+    if (widget.AlqareaQ == 'اسلام صبحي') {
+      player = AudioPlayer()
+        ..setUrl(
+            '${widget.urlQ}/${widget.quranList[widget.indexQ]}.mp3');
+    } else
+      player = AudioPlayer()
+        ..setUrl(
+            'https://server${widget.url}/${widget.quranList[widget.indexQ]}.mp3');
   }
 
   @override
@@ -234,7 +247,8 @@ class _QuranScreenState extends State<QuranScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.0),
                       image: DecorationImage(
-                          image: AssetImage('${widget.imageQ}'),fit: BoxFit.cover),
+                          image: AssetImage('${widget.imageQ}'),
+                          fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -261,7 +275,8 @@ class _QuranScreenState extends State<QuranScreen> {
                             builder: (context, snapshot) {
                               final positionData = snapshot.data;
                               return Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
                                 child: ProgressBar(
                                   barHeight: 8.0,
                                   baseBarColor: Colors.white,
@@ -337,7 +352,7 @@ class Controls extends StatelessWidget {
               iconSize: 80.0,
               color: Colors.white,
             );
-          else if (processingState != ProcessingState.completed){
+          else if (processingState != ProcessingState.completed) {
             return IconButton(
               onPressed: player.pause,
               icon: Icon(Icons.pause_rounded),
@@ -345,7 +360,8 @@ class Controls extends StatelessWidget {
               color: Colors.white,
             );
           }
-          return Icon((Icons.play_arrow_rounded),
+          return Icon(
+            (Icons.play_arrow_rounded),
             size: 80.0,
             color: Colors.white,
           );

@@ -19,6 +19,8 @@ class ElQuraaScreen extends StatelessWidget {
     'assets/images/13.jpg',
     'assets/images/14.jpg',
     'assets/images/15.jpg',
+    'assets/images/16.jpg',
+    'assets/images/17.jpg',
   ];
   List elQuraaNames = [
     'عبدالباسط عبد الصمد',
@@ -36,6 +38,8 @@ class ElQuraaScreen extends StatelessWidget {
     'عبد الرحمن السديس',
     'سعد الغامدي',
     'مشاري راشد العفاسي',
+    'عبدالله المطرود',
+    'اسلام صبحي',
   ];
   List url = [
     '13.mp3quran.net/basit_mjwd',
@@ -53,6 +57,8 @@ class ElQuraaScreen extends StatelessWidget {
     '11.mp3quran.net/sds',
     '7.mp3quran.net/s_gmd',
     '8.mp3quran.net/afs',
+    '8.mp3quran.net/mtrod',
+    'https://ia801406.us.archive.org/12/items/002_20221103_202211',
   ];
 
   @override
