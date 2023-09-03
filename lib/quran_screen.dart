@@ -3,36 +3,20 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:quran_app/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class QuranScreen extends StatefulWidget {
-  String name;
-  late String nameQ;
+  QuranChapter chapter;
+  late QuranChapter chapterQ;
 
-  int index;
-  late int indexQ;
+  AlShaikh shaikh;
+  late AlShaikh shaikhQ;
 
-  String url;
-  late String urlQ;
-
-  String Alqarea;
-  late String AlqareaQ;
-
-  String image;
-  late String imageQ;
-
-  QuranScreen(
-      {required this.name,
-      required this.index,
-      required this.Alqarea,
-      required this.url,
-      required this.image,
-      super.key}) {
-    nameQ = name;
-    indexQ = index;
-    AlqareaQ = Alqarea;
-    urlQ = url;
-    imageQ = image;
+  QuranScreen({required this.chapter, required this.shaikh,super.key})
+  {
+    chapterQ=chapter;
+    shaikhQ=shaikh;
   }
 
   List<String> quranList = [
@@ -176,14 +160,14 @@ class _QuranScreenState extends State<QuranScreen> {
   @override
   void initState() {
     super.initState();
-    if (widget.AlqareaQ == 'اسلام صبحي') {
+    if (widget.shaikhQ.name == 'اسلام صبحي') {
       player = AudioPlayer()
         ..setUrl(
-            '${widget.urlQ}/${widget.quranList[widget.indexQ]}.mp3');
+            '${widget.shaikhQ.url}/${widget.chapterQ.number}.mp3');
     } else
       player = AudioPlayer()
         ..setUrl(
-            'https://server${widget.url}/${widget.quranList[widget.indexQ]}.mp3');
+            'https://server${widget.shaikhQ.url}/${widget.chapterQ.number}.mp3');
   }
 
   @override
@@ -219,7 +203,7 @@ class _QuranScreenState extends State<QuranScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Text(
-                    '${widget.nameQ}',
+                    ' سورة ${widget.chapterQ.nameArabic}',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 38.0,
@@ -229,7 +213,7 @@ class _QuranScreenState extends State<QuranScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
-                    ' القارئ الشيخ ${widget.Alqarea}',
+                    ' القارئ الشيخ ${widget.shaikhQ.name}',
                     // overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: Colors.white,
@@ -247,7 +231,7 @@ class _QuranScreenState extends State<QuranScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.0),
                       image: DecorationImage(
-                          image: AssetImage('${widget.imageQ}'),
+                          image: AssetImage('${widget.shaikhQ.image}'),
                           fit: BoxFit.cover),
                     ),
                   ),
