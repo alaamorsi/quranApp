@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:quran_app/quran_list.dart';
 import 'package:quran_app/quran_screen.dart';
 import 'material.dart';
 
@@ -16,8 +17,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
   AlShaikh shaikhy=AlShaikh(name: 'عبدالباسط عبدالصمد', image: 'assets/images/1.png', url: '13.mp3quran.net/basit_mjwd');
 
+  List<AlShaikh> readers=allReaders;
   List<QuranChapter> quraan= hollyQuraan;
   List<QuranChapter> searchList =[];
+  List<AlShaikh> searchList2 =[];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   controller: searchController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search),
-                      hintText: 'قرأن كريم',
+                      hintText: 'ابحث عن سورة او قارئ',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),
                           borderSide: BorderSide(color: Colors.brown.shade900),
@@ -52,33 +56,47 @@ class _SearchScreenState extends State<SearchScreen> {
                   onChanged: (v) {
                     setState(() {
                       searchList=[];
+                      searchList2=[];
                     });
-                      for(int i =0 ;i < quraan.length;i++)
-                      {
-                        final soraName = quraan[i].nameArabic;
-                        final input =v;
+                    for(int i =0 ;i < readers.length;i++)
+                    {
+                      final readerName = readers[i].name;
+                      final input =v;
 
-                        if(soraName.contains(input))
-                        {
-                          setState(() {
-                            searchList.add(quraan[i]);
-                          });
-                        }
+                      if(readerName.contains(input))
+                      {
+                        setState(() {
+                          searchList2.add(readers[i]);
+                        });
                       }
-                    },
+                    }
+                    for(int i =0 ;i < quraan.length;i++)
+                    {
+                      final soraName = quraan[i].nameArabic;
+                      final input =v;
+
+                      if(soraName.contains(input))
+                      {
+                        setState(() {
+                          searchList.add(quraan[i]);
+                        });
+                      }
+                    }
+                  },
                 ),
                 SizedBox(height: 20.0,),
                 ConditionalBuilder(
-                  condition: quraan.isNotEmpty,
-                  builder: (BuildContext context) =>
-                      ListView.separated(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) =>buildItem(searchList[index], shaikhy),
-                        separatorBuilder: (context, index) => SizedBox(height: 10.0,),
-                        itemCount: searchList.length,
-                      ),
-                  fallback: (BuildContext context) => Container(),
+                  condition: searchList.isNotEmpty || searchList2.isNotEmpty,
+                  builder: (BuildContext context)=>
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index)=>searchList2.isNotEmpty
+                              ?buildElquraaItem(searchList2[index])
+                              :buildQuranItem(searchList[index],shaikhy),
+                          separatorBuilder: (context, index) =>SizedBox(height: 10.0,),
+                          itemCount:searchList2.isNotEmpty?searchList2.length:searchList.length)
+                  , fallback: (BuildContext context) => Container(),
                 ),
               ]
           ),
@@ -87,7 +105,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget buildItem(QuranChapter chapter,AlShaikh shaikh) => Container(
+  Widget buildQuranItem(QuranChapter chapter,AlShaikh shaikh) => Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(20.0,),color: Colors.brown[800],
     ),
@@ -109,6 +127,41 @@ class _SearchScreenState extends State<SearchScreen> {
               ' سورة ${chapter.nameArabic}',
               style: TextStyle(color: Colors.white, fontSize: 22.0),
             ),
+          ],
+        ),
+      ),
+    ),
+  );
+
+  Widget buildElquraaItem(AlShaikh shaikh) => Container(
+    height: 50.0,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(
+        20.0,
+      ),
+      color: Colors.brown[800],
+    ),
+    child: InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => QuranListView(shaikh: shaikh)));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.arrow_back),
+            Spacer(),
+            Text(
+              '${shaikh.name}',
+              style: TextStyle(color: Colors.white, fontSize: 22.0),
+            ),
+            SizedBox(width: 5.0,),
+            CircleAvatar(backgroundImage: AssetImage(shaikh.image),)
           ],
         ),
       ),
