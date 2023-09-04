@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/material.dart';
 import 'package:quran_app/quran_screen.dart';
-import 'package:quran_app/search_screen.dart';
+import 'package:quran_app/search_of_quran.dart';
 
 class QuranListView extends StatelessWidget {
 
@@ -22,6 +22,10 @@ class QuranListView extends StatelessWidget {
           'القرآن الكريم',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
         ),
+        actions: [IconButton(onPressed: (){
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SearchOfQuran(shaikh: shaikh)));
+        }, icon: Icon(Icons.search))],
         centerTitle: true,
         backgroundColor: Colors.brown.shade900,
         elevation: 0.0,

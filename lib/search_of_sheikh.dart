@@ -2,25 +2,20 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:quran_app/quran_list.dart';
-import 'package:quran_app/quran_screen.dart';
 import 'material.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchOfSheikh extends StatefulWidget {
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<SearchOfSheikh> createState() => _SearchOfSheikhState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchOfSheikhState extends State<SearchOfSheikh> {
 
   TextEditingController searchController = TextEditingController();
 
-  AlShaikh shaikhy=AlShaikh(name: 'عبدالباسط عبدالصمد', image: 'assets/images/1.png', url: '13.mp3quran.net/basit_mjwd');
-
   List<AlShaikh> readers=allReaders;
-  List<QuranChapter> quraan= hollyQuraan;
-  List<QuranChapter> searchList =[];
-  List<AlShaikh> searchList2 =[];
+  List<AlShaikh> searchList=[];
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   controller: searchController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search),
-                      hintText: 'ابحث عن سورة او قارئ',
+                      hintText: 'ابحث عن القارئ',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),
                           borderSide: BorderSide(color: Colors.brown.shade900),
@@ -56,7 +51,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   onChanged: (v) {
                     setState(() {
                       searchList=[];
-                      searchList2=[];
                     });
                     for(int i =0 ;i < readers.length;i++)
                     {
@@ -66,19 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       if(readerName.contains(input))
                       {
                         setState(() {
-                          searchList2.add(readers[i]);
-                        });
-                      }
-                    }
-                    for(int i =0 ;i < quraan.length;i++)
-                    {
-                      final soraName = quraan[i].nameArabic;
-                      final input =v;
-
-                      if(soraName.contains(input))
-                      {
-                        setState(() {
-                          searchList.add(quraan[i]);
+                          searchList.add(readers[i]);
                         });
                       }
                     }
@@ -86,16 +68,14 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 SizedBox(height: 20.0,),
                 ConditionalBuilder(
-                  condition: searchList.isNotEmpty || searchList2.isNotEmpty,
+                  condition: searchList.isNotEmpty,
                   builder: (BuildContext context)=>
                         ListView.separated(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index)=>searchList2.isNotEmpty
-                              ?buildElquraaItem(searchList2[index])
-                              :buildQuranItem(searchList[index],shaikhy),
+                          itemBuilder: (context, index)=>buildElquraaItem(searchList[index]),
                           separatorBuilder: (context, index) =>SizedBox(height: 10.0,),
-                          itemCount:searchList2.isNotEmpty?searchList2.length:searchList.length)
+                          itemCount: searchList.length)
                   , fallback: (BuildContext context) => Container(),
                 ),
               ]
@@ -104,35 +84,6 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
-
-  Widget buildQuranItem(QuranChapter chapter,AlShaikh shaikh) => Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20.0,),color: Colors.brown[800],
-    ),
-    child: InkWell(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>
-                QuranScreen(chapter: chapter, shaikh: shaikh)));
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(Icons.arrow_back),
-            Spacer(),
-            Text(
-              ' سورة ${chapter.nameArabic}',
-              style: TextStyle(color: Colors.white, fontSize: 22.0),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-
   Widget buildElquraaItem(AlShaikh shaikh) => Container(
     height: 50.0,
     decoration: BoxDecoration(

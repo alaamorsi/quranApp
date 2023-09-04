@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/material.dart';
 import 'package:quran_app/quran_list.dart';
+import 'package:quran_app/search_of_sheikh.dart';
 
 class ElQuraaScreen extends StatelessWidget {
 
@@ -12,6 +13,10 @@ class ElQuraaScreen extends StatelessWidget {
           'القراء',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
         ),
+        actions: [IconButton(onPressed: (){
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SearchOfSheikh()));
+        }, icon: Icon(Icons.search))],
         centerTitle: true,
         backgroundColor: Colors.brown.shade900,
         elevation: 0.0,

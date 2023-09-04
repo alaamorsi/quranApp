@@ -137,125 +137,142 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(30.0),
-          child: Column(
-              children: [
-                Container(
-                  width: 200.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.brown[300]!,
-                          Colors.brown[700]!,
-                          Colors.brown[300]!,
-                        ]
-                    ),
-                  ),
-                  child: Center(
-                    child: Text('${elAzkar.length } الذكر ${numOfZekr+1} من ',
-                      style: TextStyle(fontSize: 20.0,color: Colors.white),),
-                  ),
-                ),
-                SizedBox(height: 10.0,),
-                Container(
+          child: InkWell(
+            onTap: ()
+            {
+            if(plus <= elAzkarNumber[numOfZekr]){
+              setState(() {
+                plus +=1;
+                });
+                }
+            else
+            {
+              setState(() {
+              plus =0;
+              numOfZekr +=1;
+            });
+            }
+            },
+            child: Column(
+                children: [
+                  Container(
+                    width: 200.0,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25.0),
+                      borderRadius: BorderRadius.circular(5.0),
                       gradient: LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
                             Colors.brown[300]!,
                             Colors.brown[700]!,
+                            Colors.brown[300]!,
                           ]
                       ),
                     ),
-                    child: Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text('${elAzkar[numOfZekr]}',style: TextStyle(fontSize: 20.0,color: Colors.white),),
-                      ),
+                    child: Center(
+                      child: Text('${elAzkar.length } الذكر ${numOfZekr+1} من ',
+                        style: TextStyle(fontSize: 20.0,color: Colors.white),),
                     ),
-                ),
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 50.0,
+                  ),
+                  SizedBox(height: 10.0,),
+                  Container(
                       decoration: BoxDecoration(
-                        color: Colors.brown[800],
-                        borderRadius: BorderRadius.circular(5.0),),
-                      child: IconButton(onPressed: (){
-                        if(numOfZekr  == 0 ) {
-                          setState(() {
-                            plus = 0;
-                            numOfZekr = elAzkarNumber.length -1;
-                          });
-                        }
-                        else{
-                          setState(() {
-                            plus = 0;
-                            numOfZekr -= 1;
-                          });
-                        }
-                      },
-                        icon:
-                            Icon(Icons.chevron_left_sharp,size: 22.0,color: Colors.white,)
+                        borderRadius: BorderRadius.circular(25.0),
+                        gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.brown[300]!,
+                              Colors.brown[700]!,
+                            ]
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 5.0,),
-                    Container(
-                      width: 100.0,
-                      decoration: BoxDecoration(
-                        color: Colors.brown[800],
-                        borderRadius: BorderRadius.circular(5.0),),
-                      child: TextButton(onPressed: (){
-                        if(plus <= elAzkarNumber[numOfZekr]){
-                          setState(() {
-                            plus +=1;
-                          });
-                        }
-                        else
-                        {
-                          setState(() {
-                            plus =0;
-                            numOfZekr +=1;
-                          });
-                        }
-                      },
-                        child:
-                        Text('$plus',style: TextStyle(fontSize: 20.0,color: Colors.white),),
+                      child: Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text('${elAzkar[numOfZekr]}',style: TextStyle(fontSize: 20.0,color: Colors.white),),
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 5.0,),
-                    Container(
-                      width: 50.0,
-                      decoration: BoxDecoration(
-                        color: Colors.brown[800],
-                        borderRadius: BorderRadius.circular(5.0),),
-                      child: IconButton(onPressed: (){
-                        if(numOfZekr +1  < elAzkarNumber.length) {
-                          setState(() {
-                            plus = 0;
-                            numOfZekr += 1;
-                          });
-                        }
-                        else{
-                          setState(() {
-                            plus = 0;
-                            numOfZekr = 0;
-                          });
-                        }
-                      },
+                  ),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 50.0,
+                        decoration: BoxDecoration(
+                          color: Colors.brown[800],
+                          borderRadius: BorderRadius.circular(5.0),),
+                        child: IconButton(onPressed: (){
+                          if(numOfZekr  == 0 ) {
+                            setState(() {
+                              plus = 0;
+                              numOfZekr = elAzkarNumber.length -1;
+                            });
+                          }
+                          else{
+                            setState(() {
+                              plus = 0;
+                              numOfZekr -= 1;
+                            });
+                          }
+                        },
                           icon:
-                          Icon(Icons.chevron_right_sharp,size: 22.0,color: Colors.white,)
+                              Icon(Icons.chevron_left_sharp,size: 22.0,color: Colors.white,)
+                        ),
                       ),
-                    ),
-                  ]
-                ),
-              ]
+                      SizedBox(width: 5.0,),
+                      Container(
+                        width: 100.0,
+                        decoration: BoxDecoration(
+                          color: Colors.brown[800],
+                          borderRadius: BorderRadius.circular(5.0),),
+                        child: TextButton(onPressed: (){
+                          if(plus <= elAzkarNumber[numOfZekr]){
+                            setState(() {
+                              plus +=1;
+                            });
+                          }
+                          else
+                          {
+                            setState(() {
+                              plus =0;
+                              numOfZekr +=1;
+                            });
+                          }
+                        },
+                          child:
+                          Text('$plus',style: TextStyle(fontSize: 20.0,color: Colors.white),),
+                        ),
+                      ),
+                      SizedBox(width: 5.0,),
+                      Container(
+                        width: 50.0,
+                        decoration: BoxDecoration(
+                          color: Colors.brown[800],
+                          borderRadius: BorderRadius.circular(5.0),),
+                        child: IconButton(onPressed: (){
+                          if(numOfZekr +1  < elAzkarNumber.length) {
+                            setState(() {
+                              plus = 0;
+                              numOfZekr += 1;
+                            });
+                          }
+                          else{
+                            setState(() {
+                              plus = 0;
+                              numOfZekr = 0;
+                            });
+                          }
+                        },
+                            icon:
+                            Icon(Icons.chevron_right_sharp,size: 22.0,color: Colors.white,)
+                        ),
+                      ),
+                    ]
+                  ),
+                ]
+            ),
           ),
         ),
       ),
