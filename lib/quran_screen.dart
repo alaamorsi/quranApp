@@ -3,154 +3,21 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:quran_app/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class QuranScreen extends StatefulWidget {
-  String name;
-  late String nameQ;
+  QuranChapter chapter;
+  late QuranChapter chapterQ;
 
-  int index;
-  late int indexQ;
+  AlShaikh shaikh;
+  late AlShaikh shaikhQ;
 
-  String url;
-  late String urlQ;
-
-  String Alqarea;
-  late String AlqareaQ;
-
-  String image;
-  late String imageQ;
-
-  QuranScreen(
-      {required this.name,
-      required this.index,
-      required this.Alqarea,
-      required this.url,
-      required this.image,
-      super.key}) {
-    nameQ = name;
-    indexQ = index;
-    AlqareaQ = Alqarea;
-    urlQ = url;
-    imageQ = image;
+  QuranScreen({required this.chapter, required this.shaikh,super.key})
+  {
+    chapterQ=chapter;
+    shaikhQ=shaikh;
   }
-
-  List<String> quranList = [
-    '001',
-    '002',
-    '003',
-    '004',
-    '005',
-    '006',
-    '007',
-    '008',
-    '009',
-    '010',
-    '011',
-    '012',
-    '013',
-    '014',
-    '015',
-    '016',
-    '017',
-    '018',
-    '019',
-    '020',
-    '021',
-    '022',
-    '023',
-    '024',
-    '025',
-    '026',
-    '027',
-    '028',
-    '029',
-    '030',
-    '031',
-    '032',
-    '033',
-    '034',
-    '035',
-    '036',
-    '037',
-    '038',
-    '039',
-    '040',
-    '041',
-    '042',
-    '043',
-    '044',
-    '045',
-    '046',
-    '047',
-    '048',
-    '049',
-    '050',
-    '051',
-    '052',
-    '053',
-    '054',
-    '055',
-    '056',
-    '057',
-    '058',
-    '059',
-    '060',
-    '061',
-    '062',
-    '063',
-    '064',
-    '065',
-    '066',
-    '067',
-    '068',
-    '069',
-    '070',
-    '071',
-    '072',
-    '073',
-    '074',
-    '075',
-    '076',
-    '077',
-    '078',
-    '079',
-    '080',
-    '081',
-    '082',
-    '083',
-    '084',
-    '085',
-    '086',
-    '087',
-    '088',
-    '089',
-    '090',
-    '091',
-    '092',
-    '093',
-    '094',
-    '095',
-    '096',
-    '097',
-    '098',
-    '099',
-    '100',
-    '101',
-    '102',
-    '103',
-    '104',
-    '105',
-    '106',
-    '107',
-    '108',
-    '109',
-    '110',
-    '111',
-    '112',
-    '113',
-    '114',
-  ];
 
   @override
   State<QuranScreen> createState() => _QuranScreenState();
@@ -176,14 +43,14 @@ class _QuranScreenState extends State<QuranScreen> {
   @override
   void initState() {
     super.initState();
-    if (widget.AlqareaQ == 'اسلام صبحي') {
+    if (widget.shaikhQ.name == 'اسلام صبحي') {
       player = AudioPlayer()
         ..setUrl(
-            '${widget.urlQ}/${widget.quranList[widget.indexQ]}.mp3');
+            '${widget.shaikhQ.url}/${widget.chapterQ.number}.mp3');
     } else
       player = AudioPlayer()
         ..setUrl(
-            'https://server${widget.url}/${widget.quranList[widget.indexQ]}.mp3');
+            'https://server${widget.shaikhQ.url}/${widget.chapterQ.number}.mp3');
   }
 
   @override
@@ -219,7 +86,7 @@ class _QuranScreenState extends State<QuranScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Text(
-                    '${widget.nameQ}',
+                    ' سورة ${widget.chapterQ.nameArabic}',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 38.0,
@@ -229,7 +96,7 @@ class _QuranScreenState extends State<QuranScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
-                    ' القارئ الشيخ ${widget.Alqarea}',
+                    ' القارئ الشيخ ${widget.shaikhQ.name}',
                     // overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: Colors.white,
@@ -247,7 +114,7 @@ class _QuranScreenState extends State<QuranScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.0),
                       image: DecorationImage(
-                          image: AssetImage('${widget.imageQ}'),
+                          image: AssetImage('${widget.shaikhQ.image}'),
                           fit: BoxFit.cover),
                     ),
                   ),

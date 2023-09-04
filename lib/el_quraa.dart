@@ -1,65 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/material.dart';
 import 'package:quran_app/quran_list.dart';
 
 class ElQuraaScreen extends StatelessWidget {
-  var nameController = TextEditingController();
-  List elQuraaimages = [
-    'assets/images/1.png',
-    'assets/images/2.jpg',
-    'assets/images/3.jpg',
-    'assets/images/4.jpg',
-    'assets/images/5.jpg',
-    'assets/images/6.jpg',
-    'assets/images/7.jpg',
-    'assets/images/8.jpg',
-    'assets/images/9.jpg',
-    'assets/images/10.jpg',
-    'assets/images/11.jpg',
-    'assets/images/12.jpg',
-    'assets/images/13.jpg',
-    'assets/images/14.jpg',
-    'assets/images/15.jpg',
-    'assets/images/16.jpg',
-    'assets/images/17.jpg',
-  ];
-  List elQuraaNames = [
-    'عبدالباسط عبد الصمد',
-    'محمد صديق المنشاوي ',
-    'محمد رفعت',
-    'محمود علي البنا',
-    'محمود خليل الحصري',
-    'محمد أيوب',
-    'فارس عباد',
-    'ناصر القطامي',
-    'ياسر الدوسري',
-    'ماهر المعيقلي',
-    'صلاح بو خاطر',
-    'أحمد العجمي',
-    'عبد الرحمن السديس',
-    'سعد الغامدي',
-    'مشاري راشد العفاسي',
-    'عبدالله المطرود',
-    'اسلام صبحي',
-  ];
-  List url = [
-    '13.mp3quran.net/basit_mjwd',
-    '10.mp3quran.net/minsh',
-    '14.mp3quran.net/refat',
-    '8.mp3quran.net/bna',
-    '13.mp3quran.net/husr',
-    '8.mp3quran.net/ayyub',
-    '8.mp3quran.net/frs_a',
-    '6.mp3quran.net/qtm',
-    '11.mp3quran.net/yasser',
-    '12.mp3quran.net/maher',
-    '8.mp3quran.net/bu_khtr',
-    '10.mp3quran.net/ajm',
-    '11.mp3quran.net/sds',
-    '7.mp3quran.net/s_gmd',
-    '8.mp3quran.net/afs',
-    '8.mp3quran.net/mtrod',
-    'https://ia801406.us.archive.org/12/items/002_20221103_202211',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -97,12 +40,9 @@ class ElQuraaScreen extends StatelessWidget {
                 ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) =>
-                        buildElquraaItem(context, index),
-                    separatorBuilder: (context, index) => SizedBox(
-                          height: 10.0,
-                        ),
-                    itemCount: elQuraaNames.length),
+                    itemBuilder: (context, index) => buildElquraaItem(context, index),
+                    separatorBuilder: (context, index) => SizedBox(height: 10.0,),
+                    itemCount: allReaders.length),
               ],
             ),
           ),
@@ -112,6 +52,7 @@ class ElQuraaScreen extends StatelessWidget {
   }
 
   Widget buildElquraaItem(context, index) => Container(
+        height: 50.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
             20.0,
@@ -123,11 +64,7 @@ class ElQuraaScreen extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => QuranListView(
-                          url: url[index],
-                          Alqarea: elQuraaNames[index],
-                          image: elQuraaimages[index],
-                        )));
+                    builder: (context) => QuranListView(shaikh: allReaders[index])));
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -138,9 +75,11 @@ class ElQuraaScreen extends StatelessWidget {
                 Icon(Icons.arrow_back),
                 Spacer(),
                 Text(
-                  elQuraaNames[index],
+                  allReaders[index].name,
                   style: TextStyle(color: Colors.white, fontSize: 22.0),
                 ),
+                SizedBox(width: 5.0,),
+                CircleAvatar(backgroundImage: AssetImage(allReaders[index].image),)
               ],
             ),
           ),
