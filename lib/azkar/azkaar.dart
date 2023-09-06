@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/al_azkaar.dart';
+import 'al_azkaar.dart';
+import 'masbaha.dart';
 
 class AzkaarScreen extends StatelessWidget {
 
@@ -78,7 +79,7 @@ class AzkaarScreen extends StatelessWidget {
                     child: InkWell(
                       onTap: (){
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MorAndEvenAzkaar(time: 'المسبحة')));
+                            MaterialPageRoute(builder: (context) => Masbaha()));
                       },
                       child: Row(
                         children: [

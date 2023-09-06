@@ -1,8 +1,8 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:quran_app/quran_list.dart';
-import 'material.dart';
+import 'package:quran_app/quran/quran_list.dart';
+import '../material.dart';
 
 class SearchOfSheikh extends StatefulWidget {
 
@@ -40,14 +40,20 @@ class _SearchOfSheikhState extends State<SearchOfSheikh> {
               children: [
                 TextFormField(
                   controller: searchController,
+                  cursorColor: Colors.brown.shade900,
                   decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      hintText: 'ابحث عن القارئ',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide: BorderSide(color: Colors.brown.shade900),
-                      ),
+                    prefixIcon: Icon(Icons.search,color: Colors.brown.shade900,),
+                    hintText: '  ابحث عن القارئ',
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(color: Colors.brown.shade900,width: 2.0,),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(color: Colors.white,),
+                    ),
                   ),
+                  style: TextStyle(color: Colors.white),
                   onChanged: (v) {
                     setState(() {
                       searchList=[];
@@ -105,14 +111,18 @@ class _SearchOfSheikhState extends State<SearchOfSheikh> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(Icons.arrow_back),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7.0,),
+                color: Colors.white,),
+              child: Icon(Icons.add,color: Colors.brown),
+            ),
             Spacer(),
             Text(
               '${shaikh.name}',
               style: TextStyle(color: Colors.white, fontSize: 22.0),
             ),
             SizedBox(width: 5.0,),
-            CircleAvatar(backgroundImage: AssetImage(shaikh.image),)
           ],
         ),
       ),

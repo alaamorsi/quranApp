@@ -1,28 +1,36 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:quran_app/material.dart';
-import 'package:quran_app/quran_list.dart';
-import 'package:quran_app/search_of_sheikh.dart';
+import 'package:quran_app/quran/quran_screen.dart';
+import 'package:quran_app/quran/search_of_quran.dart';
 
-class ElQuraaScreen extends StatelessWidget {
+class QuranListView extends StatelessWidget {
+
+  AlShaikh shaikh;
+  late AlShaikh shaikhQ;
+
+  QuranListView({required this.shaikh,super.key}) {
+    shaikhQ = shaikh;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'القراء',
+          'القرآن الكريم',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
         ),
         actions: [IconButton(onPressed: (){
           Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SearchOfSheikh()));
+              MaterialPageRoute(builder: (context) => SearchOfQuran(shaikh: shaikh)));
         }, icon: Icon(Icons.search))],
         centerTitle: true,
         backgroundColor: Colors.brown.shade900,
         elevation: 0.0,
       ),
       body: Container(
-        height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -45,9 +53,10 @@ class ElQuraaScreen extends StatelessWidget {
                 ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => buildElquraaItem(context, index),
-                    separatorBuilder: (context, index) => SizedBox(height: 10.0,),
-                    itemCount: allReaders.length),
+                    itemBuilder: (context , index)=>buildListItem(context , index),
+                    separatorBuilder: (context , index)=> SizedBox(height: 10.0,),
+                    itemCount: hollyQuraan.length
+                ),
               ],
             ),
           ),
@@ -56,20 +65,14 @@ class ElQuraaScreen extends StatelessWidget {
     );
   }
 
-  Widget buildElquraaItem(context, index) => Container(
-        height: 50.0,
+  Widget buildListItem(context , index) => Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            20.0,
-          ),
-          color: Colors.brown[800],
+          borderRadius: BorderRadius.circular(20.0,),color: Colors.brown[800],
         ),
         child: InkWell(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => QuranListView(shaikh: allReaders[index])));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => QuranScreen(chapter: hollyQuraan[index], shaikh: shaikh)));
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -77,14 +80,17 @@ class ElQuraaScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.arrow_back),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7.0,),
+                    color: Colors.white,),
+                  child: Icon(Icons.add,color: Colors.brown),
+                ),
                 Spacer(),
                 Text(
-                  allReaders[index].name,
+                  ' سورة ${hollyQuraan[index].nameArabic}',
                   style: TextStyle(color: Colors.white, fontSize: 22.0),
                 ),
-                SizedBox(width: 5.0,),
-                CircleAvatar(backgroundImage: AssetImage(allReaders[index].image),)
               ],
             ),
           ),

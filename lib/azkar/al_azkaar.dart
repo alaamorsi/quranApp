@@ -111,10 +111,6 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
       elAzkar=eveningAzkar;
       elAzkarNumber=eveningAzkarNumber;
     }
-    else {
-        elAzkar=sbha;
-        elAzkarNumber=sbhaNumber;
-      }
     return Scaffold(
       appBar: AppBar(
         title: Text(

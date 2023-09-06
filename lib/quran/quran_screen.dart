@@ -227,9 +227,10 @@ class Controls extends StatelessWidget {
               color: Colors.white,
             );
           }
-          return Icon(
-            (Icons.play_arrow_rounded),
-            size: 80.0,
+          return IconButton(
+            onPressed: player.play,
+            icon: Icon(Icons.play_arrow_rounded),
+            iconSize: 80.0,
             color: Colors.white,
           );
         });

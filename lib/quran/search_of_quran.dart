@@ -1,8 +1,8 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:quran_app/quran_screen.dart';
-import 'material.dart';
+import 'package:quran_app/quran/quran_screen.dart';
+import '../material.dart';
 
 class SearchOfQuran extends StatefulWidget {
 
@@ -47,12 +47,17 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
               children: [
                 TextFormField(
                   controller: searchController,
+                  cursorColor: Colors.brown.shade900,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    hintText: 'ابحث عن السورة',
-                    border: OutlineInputBorder(
+                    prefixIcon: Icon(Icons.search,color: Colors.brown.shade900,),
+                    hintText: '  ابحث عن السورة',
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(color: Colors.brown.shade900,width: 2.0,),
+                    ),
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(color: Colors.brown.shade900),
+                      borderSide: BorderSide(color: Colors.white,),
                     ),
                   ),
                   onChanged: (v) {
@@ -109,7 +114,12 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.arrow_back),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7.0,),
+                    color: Colors.white,),
+                  child: Icon(Icons.add,color: Colors.brown),
+                ),
                 Spacer(),
                 Text(
                   ' سورة ${chapter.nameArabic}',
