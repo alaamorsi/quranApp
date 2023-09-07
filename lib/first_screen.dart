@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quran_app/azkar/azkaar.dart';
 import 'package:quran_app/quran/el_quraa.dart';
 import 'package:quran_app/quran/mushaf.dart';
 import 'azkar/al_azkaar.dart';
@@ -108,7 +107,6 @@ class _FirstScreenState extends State<FirstScreen> {
                   SizedBox(width: 10.0,),
                   firstScreenItem(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
                   SizedBox(width: 10.0,),
-                  firstScreenItem(context: context, title: 'الأذكار', navTo: AzkaarScreen(), icon:Icons.yard),
                 ]
             ),
             SizedBox(height: 10.0,),
@@ -130,8 +128,6 @@ class _FirstScreenState extends State<FirstScreen> {
                 firstScreenItemV(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
                 SizedBox(height: 20.0,),
                 firstScreenItemV(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'الأذكار', navTo: AzkaarScreen(), icon:Icons.yard),
                 SizedBox(height: 20.0,),
                 firstScreenItemV(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
                 SizedBox(height: 20.0,),

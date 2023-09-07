@@ -57,40 +57,4 @@ class ElQuraaScreen extends StatelessWidget {
       ),
     );
   }
-
-  Widget buildElquraaItem(context, index) => Container(
-        height: 50.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0,), color: Colors.brown[800],
-        ),
-        child: InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => QuranListView(shaikh: allReaders[index])));
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7.0,),
-                    color: Colors.white,),
-                  child: Icon(Icons.add,color: Colors.brown),
-                ),
-                Spacer(),
-                Text(
-                  allReaders[index].name,
-                  style: TextStyle(color: Colors.white, fontSize: 22.0),
-                ),
-                SizedBox(width: 5.0,),
-              ],
-            ),
-          ),
-        ),
-      );
 }
