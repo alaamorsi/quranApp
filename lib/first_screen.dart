@@ -2,20 +2,81 @@ import 'package:flutter/material.dart';
 import 'package:quran_app/azkar/azkaar.dart';
 import 'package:quran_app/quran/el_quraa.dart';
 import 'package:quran_app/quran/mushaf.dart';
+import 'azkar/al_azkaar.dart';
+import 'azkar/masbaha.dart';
+import 'our_widgets.dart';
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatefulWidget {
+  @override
+  State<FirstScreen> createState() => _FirstScreenState();
+}
+class _FirstScreenState extends State<FirstScreen> {
+  int selectedIndex = 0;
+  bool cardV=true;
+  bool mode = true;
+
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'القرآن الكريم',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
+      endDrawer: Drawer(
+        width: 150.0,
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 20.0),
+          children: [
+            Container(
+              width: double.infinity,
+              height: 80.0,
+              child: DrawerHeader(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('الاعدادات', style: TextStyle(color: Colors.white,fontSize: 20)),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                      color: Colors.brown,
+                  ),
+                  margin: EdgeInsets.all(0.0),
+                  padding: EdgeInsets.all(0.0)
+              ),
+            ),
+            SizedBox(height: 10,),
+            ListTile(
+              selectedTileColor: Colors.brown.shade300,
+              selectedColor: Colors.white,
+              leading: mode?Icon(Icons.light_mode):Icon(Icons.dark_mode),
+              selected: selectedIndex == 0,
+              onTap: () {
+                onItemTapped(0);
+                setState(() {
+                  mode= !mode;
+                });
+              },
+            ),
+            ListTile(
+              selectedTileColor: Colors.brown.shade300,
+              selectedColor: Colors.white,
+              leading: cardV?Icon(Icons.margin_outlined):Icon(Icons.credit_card_sharp),
+              selected: selectedIndex == 1,
+              onTap: () {
+                onItemTapped(1);
+                setState(() {
+                  cardV= !cardV;
+                });
+              },
+            )
+          ],
         ),
-        centerTitle: true,
-        backgroundColor: Colors.brown.shade900,
-        elevation: 0.0,
       ),
+      appBar: myAppBar(context: context, title: 'اخي المسلم'),
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -30,50 +91,56 @@ class FirstScreen extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              //for the image
-              Container(height: 300,
-                width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    image: DecorationImage(
-                        image: AssetImage('assets/AppImage.jpg')
-                        ,fit: BoxFit.cover),
-                  ),
-              ),
-              SizedBox(height: 20.0,),
-              //for the first button
-              justItem(context: context, title: 'الأستماع', navTo: ElQuraaScreen()),
-              SizedBox(height: 20.0,),
-              //for the second button
-              justItem(context: context, title: 'المصحف', navTo: MushafScreen()),
-              SizedBox(height: 20.0,),
-              //therd button
-              justItem(context: context, title: 'الأذكار', navTo: AzkaarScreen()),
-            ]
-          ),
+          child: firstDesign(cardV)
         ),
       ),
     );
   }
-  Widget justItem({required context,required String title,required  navTo})=>
-      Expanded(
-        child: InkWell(
-          onTap: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => navTo));
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.brown.shade900,
-              borderRadius: BorderRadius.circular(20.0),
-              image: DecorationImage(image: AssetImage('assets/background/b1.jpg'),fit: BoxFit.cover),
+  Widget firstDesign(bool v)
+  {
+    if (v)
+    {
+      return Column(
+          children: [
+            Row(
+                children: [
+                  firstScreenItem(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
+                  SizedBox(width: 10.0,),
+                  firstScreenItem(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
+                  SizedBox(width: 10.0,),
+                  firstScreenItem(context: context, title: 'الأذكار', navTo: AzkaarScreen(), icon:Icons.yard),
+                ]
             ),
-            child: Center(child: Text(title,style: TextStyle(color: Colors.white,fontSize: 22.0),)),
-          ),
-        ),
+            SizedBox(height: 10.0,),
+            Row(
+                children: [
+                  firstScreenItem(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
+                  SizedBox(width: 10.0,),
+                  firstScreenItem(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
+                  SizedBox(width: 10.0,),
+                  firstScreenItem(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on),                ]
+            ),
+          ]
       );
-
+    }
+    else
+      {
+        return ListView(
+              children: [
+                firstScreenItemV(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
+                SizedBox(height: 20.0,),
+                firstScreenItemV(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
+                SizedBox(height: 20.0,),
+                firstScreenItemV(context: context, title: 'الأذكار', navTo: AzkaarScreen(), icon:Icons.yard),
+                SizedBox(height: 20.0,),
+                firstScreenItemV(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
+                SizedBox(height: 20.0,),
+                firstScreenItemV(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
+                SizedBox(height: 20.0,),
+                firstScreenItemV(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on),
+              ]
+        );
+      }
+  }
 }
 

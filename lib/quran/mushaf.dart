@@ -35,7 +35,7 @@ class _MushafScreenState extends State<MushafScreen> {
     bool isMarked = CacheHelper.getData(key: 'isMarked') ?? false;
     return Scaffold(
       endDrawer: Drawer(
-        semanticLabel: 'lable',
+
         width: 180.0,
         child: ListView.separated(
           itemBuilder: (context, index) =>

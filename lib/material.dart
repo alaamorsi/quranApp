@@ -12,7 +12,7 @@ class AlShaikh{
 List<AlShaikh> allReaders=[
   AlShaikh(name: 'عبدالباسط عبدالصمد', image: 'assets/images/1.png', url: '13.mp3quran.net/basit_mjwd'),
   AlShaikh(name: 'محمد صديق المنشاوي ', image: 'assets/images/2.jpg', url: '10.mp3quran.net/minsh'),
-  AlShaikh(name: 'محمد رفعت', image: 'assets/images/3.jpg', url: '14.mp3quran.net/refat'),
+  // AlShaikh(name: 'محمد رفعت', image: 'assets/images/3.jpg', url: '14.mp3quran.net/refat'),
   AlShaikh(name: 'محمود علي البنا', image: 'assets/images/4.jpg', url: '8.mp3quran.net/bna'),
   AlShaikh(name: 'محمود خليل الحصري', image: 'assets/images/5.jpg', url: '13.mp3quran.net/husr'),
   AlShaikh(name: 'محمد أيوب', image: 'assets/images/6.jpg', url: '8.mp3quran.net/ayyub'),

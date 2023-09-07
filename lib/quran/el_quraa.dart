@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/material.dart';
+import 'package:quran_app/our_widgets.dart';
 import 'package:quran_app/quran/quran_list.dart';
 import 'package:quran_app/quran/search_of_sheikh.dart';
 
@@ -10,7 +11,7 @@ class ElQuraaScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'القراء',
+          'تلاوت القرآن الكريم',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
         ),
         actions: [IconButton(onPressed: (){
@@ -45,7 +46,8 @@ class ElQuraaScreen extends StatelessWidget {
                 ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => buildElquraaItem(context, index),
+                    itemBuilder: (context, index) =>
+                        justItem(context: context, from: allReaders, index: index, navScreen: QuranListView(shaikh: allReaders[index]),),
                     separatorBuilder: (context, index) => SizedBox(height: 10.0,),
                     itemCount: allReaders.length),
               ],
@@ -59,10 +61,7 @@ class ElQuraaScreen extends StatelessWidget {
   Widget buildElquraaItem(context, index) => Container(
         height: 50.0,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            20.0,
-          ),
-          color: Colors.brown[800],
+          borderRadius: BorderRadius.circular(20.0,), color: Colors.brown[800],
         ),
         child: InkWell(
           onTap: () {
