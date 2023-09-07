@@ -96,6 +96,8 @@ class _FirstScreenState extends State<FirstScreen> {
       ),
     );
   }
+
+  //design for horizental and vertical widgets
   Widget firstDesign(bool v)
   {
     if (v)
