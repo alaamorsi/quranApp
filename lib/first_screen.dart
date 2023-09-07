@@ -66,9 +66,8 @@ class FirstScreen extends StatelessWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.brown.shade900,
+              color: Colors.brown[800],
               borderRadius: BorderRadius.circular(20.0),
-              image: DecorationImage(image: AssetImage('assets/background/b1.jpg'),fit: BoxFit.cover),
             ),
             child: Center(child: Text(title,style: TextStyle(color: Colors.white,fontSize: 22.0),)),
           ),

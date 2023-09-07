@@ -13,10 +13,9 @@ class QuranScreen extends StatefulWidget {
   AlShaikh shaikh;
   late AlShaikh shaikhQ;
 
-  QuranScreen({required this.chapter, required this.shaikh,super.key})
-  {
-    chapterQ=chapter;
-    shaikhQ=shaikh;
+  QuranScreen({required this.chapter, required this.shaikh, super.key}) {
+    chapterQ = chapter;
+    shaikhQ = shaikh;
   }
 
   @override
@@ -45,8 +44,10 @@ class _QuranScreenState extends State<QuranScreen> {
     super.initState();
     if (widget.shaikhQ.name == 'اسلام صبحي') {
       player = AudioPlayer()
-        ..setUrl(
-            '${widget.shaikhQ.url}/${widget.chapterQ.number}.mp3');
+        ..setUrl('${widget.shaikhQ.url}/${widget.chapterQ.number}.mp3');
+    } else if (widget.shaikhQ.name == 'حسن صالح') {
+      player = AudioPlayer()
+        ..setUrl('${widget.shaikhQ.url}/${widget.chapterQ.number}.mp3');
     } else
       player = AudioPlayer()
         ..setUrl(
@@ -228,7 +229,12 @@ class Controls extends StatelessWidget {
             );
           }
           return IconButton(
-            onPressed: player.play,
+            onPressed: () {
+              if (processingState == ProcessingState.completed) {
+                ProcessingState.buffering;
+                player.play;
+              }
+            },
             icon: Icon(Icons.play_arrow_rounded),
             iconSize: 80.0,
             color: Colors.white,
