@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
-import 'package:quran_app/cache_helper.dart';
+import 'package:quran_app/our_widgets.dart';
 import '../material.dart';
 
-class MushafScreen extends StatefulWidget {
+class MotshabhatScreen extends StatefulWidget {
 
   @override
-  State<MushafScreen> createState() => _MushafScreenState();
+  State<MotshabhatScreen> createState() => MotshabhatScreenState();
 }
 
-class _MushafScreenState extends State<MushafScreen> {
+class MotshabhatScreenState extends State<MotshabhatScreen> {
 
-  List<QuranChapter> quran = hollyQuraan;
+  List<Motshabhat> motshabhat = quraanMotshabhat;
   List<bool> select = [
     false, false, false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false, false, false, false,
@@ -20,38 +20,33 @@ class _MushafScreenState extends State<MushafScreen> {
     false, false, false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false,
+    false, false, false, false, false, false, false,
   ];
   final pdfController = PdfController(
-    document: PdfDocument.openAsset('assets/Mushaf.pdf'),
+    document: PdfDocument.openAsset('assets/motshabhat.pdf'),
   );
 
   @override
   Widget build(BuildContext context) {
-    bool isMarked = CacheHelper.getData(key: 'isMarked') ?? false;
     return Scaffold(
       endDrawer: Drawer(
-
         width: 180.0,
         child: ListView.separated(
           itemBuilder: (context, index) =>
-              indexing(currentChapter: quran, isHere: select, index: index),
+              indexing(motshabhat: motshabhat, isHere: select, index: index),
           separatorBuilder: (context, index) =>
               Container(height: 1, color: Colors.white70,),
-          itemCount: quran.length,
+          itemCount: motshabhat.length,
         ),
       ),
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.brown.shade900,
-        elevation: 0.0,
-        title: Text('المصحف',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   backgroundColor: Colors.brown.shade900,
+      //   elevation: 0.0,
+      //   title: Text('المصحف',
+      //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),),
+      // ),
+      appBar: myAppBar(context: context, title: 'متشابهات'),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -76,7 +71,8 @@ class _MushafScreenState extends State<MushafScreen> {
                   //   height: page.height * 1.3,
                   // ),
                   onPageChanged: (page) {
-                    onChange(currentChapter: quran, isHere: select, page: page);
+                    onChange(motshabhat: motshabhat, isHere: select, page: page);
+                    pdfController.initialPage=2;
                   },
                 ),
               ),
@@ -86,32 +82,6 @@ class _MushafScreenState extends State<MushafScreen> {
                 child: Row(
                     children: [
                       SizedBox(width: 15.0,),
-                      IconButton(
-                        icon: Icon(
-                          Icons.bookmark,
-                          color: isMarked ? Colors.blue : Colors.white,
-                        ),
-                        onPressed: () {
-                          if (isMarked == true) {
-                            setState(() {
-                              int pageNumber = CacheHelper.getData(
-                                  key: 'markedPage');
-                              pdfController.jumpToPage(pageNumber);
-                              CacheHelper.saveData(
-                                  key: 'isMarked', value: false);
-                            });
-                          }
-                          else {
-                            setState(() {
-                              int pageNumber = pdfController.page;
-                              CacheHelper.saveData(
-                                  key: 'markedPage', value: pageNumber);
-                              CacheHelper.saveData(
-                                  key: 'isMarked', value: true);
-                            });
-                          }
-                        },
-                      ),
                       Spacer(),
                       IconButton(
                         icon: Icon(
@@ -147,29 +117,29 @@ class _MushafScreenState extends State<MushafScreen> {
   }
 
   Widget indexing({
-    required List<QuranChapter> currentChapter,
+    required List<Motshabhat> motshabhat,
     required List<bool> isHere,
     required int index}) =>
       ListTile(
         selected: isHere[index] ? true : false,
         tileColor: Colors.brown,
-        title: Center(child: Text(currentChapter[index].nameArabic,
+        title: Center(child: Text(motshabhat[index].nameArabic,
           style: TextStyle(fontSize: 18.0,
               color: isHere[index] ? Colors.brown : Colors.white),)),
         onTap: () {
-          pdfController.jumpToPage(currentChapter[index].pageNumber);
-          onChange(currentChapter: currentChapter,
+          pdfController.jumpToPage(motshabhat[index].pageNumber);
+          onChange(motshabhat: motshabhat,
               isHere: isHere,
-              page: currentChapter[index].pageNumber);
+              page: motshabhat[index].pageNumber);
         },
       );
 
   void onChange({
-    required List<QuranChapter> currentChapter,
+    required List<Motshabhat> motshabhat,
     required List<bool> isHere,
     required int page}) {
-    for (int i = 1; i < quran.length; i++) {
-      if (page >= currentChapter[i].pageNumber && page < currentChapter[i + 1].pageNumber) {
+    for (int i = 0; i < motshabhat.length; i++) {
+      if (page >= motshabhat[i].pageNumber && page < motshabhat[i + 1].pageNumber) {
         for (int j = 0; j < isHere.length; j++) {
           if (j != i) {
             isHere[j] = false;
@@ -183,18 +153,20 @@ class _MushafScreenState extends State<MushafScreen> {
         });
         break;
       }
-      else if (page == currentChapter[i].pageNumber) {
+      else if (page == motshabhat[i].pageNumber) {
         for (int j = 0; j < isHere.length; j++) {
-          if (isHere[j] && page != currentChapter[j].pageNumber) {
-            isHere[j] = false;
+          if (page == motshabhat[j].pageNumber) {
+            setState(() {
+              isHere[j] = true;
+            });
           }
-          else if (!isHere[j] && page == currentChapter[j].pageNumber) {
-            isHere[j] = true;
+          else{
+            setState(() {
+              isHere[j] = false;
+            });
           }
         }
-        setState(() {
-          isHere[i] = true;
-        });
+        break;
       }
       else {
         setState(() {

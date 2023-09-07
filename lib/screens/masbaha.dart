@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quran_app/our_widgets.dart';
 
 class Masbaha extends StatefulWidget {
 
@@ -13,13 +14,7 @@ class _MasbahaState extends State<Masbaha> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'المسبحة',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),),
-        centerTitle: true,
-        backgroundColor: Colors.brown.shade900,
-        elevation: 0.0,),
+      appBar: myAppBar(context: context, title: 'المسبحة'),
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(

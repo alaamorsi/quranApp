@@ -1,33 +1,26 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:quran_app/quran/quran_screen.dart';
+import 'package:quran_app/screens/quran_list.dart';
 import '../material.dart';
 
-class SearchOfQuran extends StatefulWidget {
-
-  AlShaikh shaikh;
-  late AlShaikh shaikhQ;
-
-  SearchOfQuran({required this.shaikh,super.key}) {
-    shaikhQ = shaikh;
-  }
+class SearchOfSheikh extends StatefulWidget {
 
   @override
-  State<SearchOfQuran> createState() => _SearchOfQuranState();
+  State<SearchOfSheikh> createState() => _SearchOfSheikhState();
 }
 
-class _SearchOfQuranState extends State<SearchOfQuran> {
+class _SearchOfSheikhState extends State<SearchOfSheikh> {
 
   TextEditingController searchController = TextEditingController();
 
-  List<QuranChapter> quraan = hollyQuraan;
-  List<QuranChapter> searchList = [];
+  List<AlShaikh> readers=allReaders;
+  List<AlShaikh> searchList=[];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown.shade300,
+      backgroundColor:Colors.brown.shade300,
       appBar: AppBar(
         title: Text(
           'البحث',
@@ -50,7 +43,7 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
                   cursorColor: Colors.brown.shade900,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search,color: Colors.brown.shade900,),
-                    hintText: '  ابحث عن السورة',
+                    hintText: '  ابحث عن القارئ',
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
                       borderSide: BorderSide(color: Colors.brown.shade900,width: 2.0,),
@@ -60,17 +53,20 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
                       borderSide: BorderSide(color: Colors.white,),
                     ),
                   ),
+                  style: TextStyle(color: Colors.white),
                   onChanged: (v) {
                     setState(() {
-                      searchList = [];
+                      searchList=[];
                     });
-                    for (int i = 0; i < quraan.length; i++) {
-                      final soraName = quraan[i].nameArabic;
-                      final input = v;
+                    for(int i =0 ;i < readers.length;i++)
+                    {
+                      final readerName = readers[i].name;
+                      final input =v;
 
-                      if (soraName.contains(input)) {
+                      if(readerName.contains(input))
+                      {
                         setState(() {
-                          searchList.add(quraan[i]);
+                          searchList.add(readers[i]);
                         });
                       }
                     }
@@ -79,14 +75,12 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
                 SizedBox(height: 20.0,),
                 ConditionalBuilder(
                   condition: searchList.isNotEmpty,
-                  builder: (BuildContext context) =>
-                      ListView.separated(
+                  builder: (BuildContext context)=>
+                        ListView.separated(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) =>
-                              buildQuranItem(searchList[index], widget.shaikh),
-                          separatorBuilder: (context, index) =>
-                              SizedBox(height: 10.0,),
+                          itemBuilder: (context, index)=>buildElquraaItem(searchList[index]),
+                          separatorBuilder: (context, index) =>SizedBox(height: 10.0,),
                           itemCount: searchList.length)
                   , fallback: (BuildContext context) => Container(),
                 ),
@@ -96,38 +90,42 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
       ),
     );
   }
-
-  Widget buildQuranItem(QuranChapter chapter, AlShaikh shaikh) =>
-      Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0,), color: Colors.brown[800],
-        ),
-        child: InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) =>
-                    QuranScreen(chapter: chapter, shaikh: shaikh)));
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7.0,),
-                    color: Colors.white,),
-                  child: Icon(Icons.add,color: Colors.brown),
-                ),
-                Spacer(),
-                Text(
-                  ' سورة ${chapter.nameArabic}',
-                  style: TextStyle(color: Colors.white, fontSize: 22.0),
-                ),
-              ],
+  Widget buildElquraaItem(AlShaikh shaikh) => Container(
+    height: 50.0,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(
+        20.0,
+      ),
+      color: Colors.brown[800],
+    ),
+    child: InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => QuranListView(shaikh: shaikh)));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7.0,),
+                color: Colors.white,),
+              child: Icon(Icons.add,color: Colors.brown),
             ),
-          ),
+            Spacer(),
+            Text(
+              '${shaikh.name}',
+              style: TextStyle(color: Colors.white, fontSize: 22.0),
+            ),
+            SizedBox(width: 5.0,),
+          ],
         ),
-      );
+      ),
+    ),
+  );
 }

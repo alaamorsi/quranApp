@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/material.dart';
 import 'package:quran_app/our_widgets.dart';
-import 'package:quran_app/quran/quran_list.dart';
-import 'package:quran_app/quran/search_of_sheikh.dart';
+import 'package:quran_app/screens/quran_list.dart';
+import 'package:quran_app/screens/search_of_sheikh.dart';
 
 class ElQuraaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'تلاوت القرآن الكريم',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
-        ),
-        actions: [IconButton(onPressed: (){
-          Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SearchOfSheikh()));
-        }, icon: Icon(Icons.search))],
-        centerTitle: true,
-        backgroundColor: Colors.brown.shade900,
-        elevation: 0.0,
-      ),
+      appBar: myAppBar(context: context, title: 'تلاوت القرآن الكريم',iconButton: true,icon: Icons.search,navScreen: SearchOfSheikh()),
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -47,7 +35,7 @@ class ElQuraaScreen extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) =>
-                        justItem(context: context, from: allReaders, index: index, navScreen: QuranListView(shaikh: allReaders[index]),),
+                        qaraaItem(context: context, from: allReaders, index: index, navScreen: QuranListView(shaikh: allReaders[index]),),
                     separatorBuilder: (context, index) => SizedBox(height: 10.0,),
                     itemCount: allReaders.length),
               ],

@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 ////////////////////////////////////////////
 PreferredSizeWidget myAppBar({
-  required BuildContext context, required String title, bool iconButton =false, IconData? icon, navScreen
+  required BuildContext context,
+  required String title,
+  String backImage ='assets/background/b0.jpg',
+  bool iconButton =false,
+  IconData? icon,
+  navScreen
     })=>AppBar(
   title: Text(
     title,
@@ -19,7 +24,7 @@ PreferredSizeWidget myAppBar({
   flexibleSpace: Container(
     decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/background/b4.jpg'),
+            image: AssetImage(backImage),
             fit: BoxFit.cover
         )
     ),
@@ -93,7 +98,7 @@ Widget firstScreenItemV({required context,required String title,required IconDat
     );
 
 //////////////////////////////////////
-Widget justItem({required context,required List from,required int index,required  navScreen})=>
+Widget qaraaItem({required context,required List from,required int index,required  navScreen})=>
     Container(
       height: 50.0,
       decoration: BoxDecoration(
@@ -123,6 +128,46 @@ Widget justItem({required context,required List from,required int index,required
               Spacer(),
               Text(
                 from[index].name,
+                style: TextStyle(color: Colors.white, fontSize: 22.0),
+              ),
+              SizedBox(width: 5.0,),
+            ],
+          ),
+        ),
+      ),
+    );
+
+//////////////////////////////////////
+Widget chapterItem({required context,required List from,required int index,required  navScreen})=>
+    Container(
+      height: 50.0,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(13.0,),
+        image: DecorationImage(image: AssetImage('assets/background/b3.jpg'),fit: BoxFit.cover),
+      ),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => navScreen));
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0,),
+                  color: Colors.white,),
+                child: Icon(Icons.add,color: Colors.brown),
+              ),
+              Spacer(),
+              Text(
+                " سورة ${from[index].nameArabic}",
                 style: TextStyle(color: Colors.white, fontSize: 22.0),
               ),
               SizedBox(width: 5.0,),

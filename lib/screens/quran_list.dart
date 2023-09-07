@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:quran_app/material.dart';
-import 'package:quran_app/quran/quran_screen.dart';
-import 'package:quran_app/quran/search_of_quran.dart';
+import 'package:quran_app/our_widgets.dart';
+import 'package:quran_app/screens/quran_screen.dart';
+import 'package:quran_app/screens/search_of_quran.dart';
 
 class QuranListView extends StatelessWidget {
 
@@ -17,19 +17,7 @@ class QuranListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'القرآن الكريم',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
-        ),
-        actions: [IconButton(onPressed: (){
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SearchOfQuran(shaikh: shaikh)));
-        }, icon: Icon(Icons.search))],
-        centerTitle: true,
-        backgroundColor: Colors.brown.shade900,
-        elevation: 0.0,
-      ),
+      appBar: myAppBar(context: context, title: 'القرآن الكريم',iconButton: true,icon: Icons.search,navScreen: SearchOfQuran(shaikh: shaikh)),
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -53,7 +41,8 @@ class QuranListView extends StatelessWidget {
                 ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context , index)=>buildListItem(context , index),
+                    itemBuilder: (context , index) =>
+                        chapterItem(context: context, from: hollyQuraan, index: index, navScreen: QuranScreen(chapter: hollyQuraan[index], shaikh: shaikh)),
                     separatorBuilder: (context , index)=> SizedBox(height: 10.0,),
                     itemCount: hollyQuraan.length
                 ),
