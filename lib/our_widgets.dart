@@ -45,18 +45,19 @@ Widget firstScreenItem({required context,required String title,required IconData
           ),
           child: Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(icon,size: 30.0,color: Colors.white,),
-                    SizedBox(height: 5.0,),
-                    Text(title,style: TextStyle(color: Colors.white,fontFamily: 'nor',fontSize: 21.0),),
-                  ],
-                ),
+              Spacer(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 10.0,),
+                  Icon(icon,size: 30.0,color: Colors.white,),
+                  SizedBox(height: 5.0,),
+                  Text(title,style: TextStyle(color: Colors.white,fontFamily: 'nor',fontSize: 21.0),),
+                  SizedBox(height: 10.0,),
+                ],
               ),
+              Spacer(),
             ],
           ),
         ),
@@ -77,18 +78,19 @@ Widget firstScreenItemV({required context,required String title,required IconDat
             image: DecorationImage(image: AssetImage('assets/background/b3.jpg'),fit: BoxFit.cover),
           ),
           child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Icon(icon,size: 35.0,color: Colors.white,),
-                    Spacer(),
-                    Text(title,style: TextStyle(color: Colors.white,fontFamily: 'nor',fontSize: 22.0),),
-                  ]
+              children: [
+                SizedBox(height: 20.0,),
+                Row(
+                    children: [
+                      SizedBox(width: 20.0,),
+                      Icon(icon,size: 35.0,color: Colors.white,),
+                      Spacer(),
+                      Text(title,style: TextStyle(color: Colors.white,fontFamily: 'nor',fontSize: 22.0),),
+                      SizedBox(width: 20.0,),
+                    ]
                 ),
-              ),
-            ]
+                SizedBox(height: 20.0,)
+              ]
           ),
         ),
       ),

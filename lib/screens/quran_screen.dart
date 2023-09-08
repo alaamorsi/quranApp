@@ -24,7 +24,6 @@ class QuranScreen extends StatefulWidget {
 
 class _QuranScreenState extends State<QuranScreen> {
   bool playing = false;
-  IconData playButton = Icons.play_arrow;
   late AudioPlayer player;
 
   Stream<PositionData> get positionDataStream =>
@@ -42,6 +41,7 @@ class _QuranScreenState extends State<QuranScreen> {
   @override
   void initState() {
     super.initState();
+
     if (widget.shaikhQ.name == 'اسلام صبحي') {
       player = AudioPlayer()
         ..setUrl('${widget.shaikhQ.url}/${widget.chapterQ.number}.mp3');
@@ -208,37 +208,37 @@ class Controls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<PlayerState>(
-        stream: player.playerStateStream,
-        builder: (context, snapshot) {
-          final playerState = snapshot.data;
-          final processingState = playerState?.processingState;
-          final playing = playerState?.playing;
-          if (!(playing ?? false))
-            return IconButton(
-              onPressed: player.play,
-              icon: Icon(Icons.play_arrow_rounded),
-              iconSize: 80.0,
-              color: Colors.white,
-            );
-          else if (processingState != ProcessingState.completed) {
-            return IconButton(
-              onPressed: player.pause,
-              icon: Icon(Icons.pause_rounded),
-              iconSize: 80.0,
-              color: Colors.white,
-            );
-          }
+      stream: player.playerStateStream,
+      builder: (context, snapshot) {
+        final playerState = snapshot.data;
+        final processingState = playerState?.processingState;
+        final playing = playerState?.playing;
+
+        if (!(playing ?? false)) {
           return IconButton(
-            onPressed: () {
-              if (processingState == ProcessingState.completed) {
-                ProcessingState.buffering;
-                player.play;
-              }
-            },
+            onPressed: player.play,
             icon: Icon(Icons.play_arrow_rounded),
             iconSize: 80.0,
             color: Colors.white,
           );
-        });
+        } else if (processingState != ProcessingState.completed) {
+          return IconButton(
+            onPressed: player.pause,
+            icon: Icon(Icons.pause_rounded),
+            iconSize: 80.0,
+            color: Colors.white,
+          );
+        }
+        else {
+          Navigator.pop(context);
+          return IconButton(
+            onPressed: player.play,
+            icon: Icon(Icons.play_arrow_rounded),
+            iconSize: 80.0,
+            color: Colors.white,
+          );
+        }
+      },
+    );
   }
 }

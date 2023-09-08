@@ -42,7 +42,7 @@ class _FirstScreenState extends State<FirstScreen> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.0),
-                      color: Colors.brown,
+                    color: Colors.brown,
                   ),
                   margin: EdgeInsets.all(0.0),
                   padding: EdgeInsets.all(0.0)
@@ -90,12 +90,14 @@ class _FirstScreenState extends State<FirstScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: firstDesign(cardV)
+            padding: const EdgeInsets.all(20.0),
+            child: firstDesign(cardV)
         ),
       ),
     );
   }
+
+  //design for horizental and vertical widgets
   Widget firstDesign(bool v)
   {
     if (v)
@@ -104,43 +106,42 @@ class _FirstScreenState extends State<FirstScreen> {
           children: [
             Row(
                 children: [
-                  firstScreenItem(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
-                  SizedBox(width: 10.0,),
-                  firstScreenItem(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
-                  SizedBox(width: 10.0,),
-                  firstScreenItem(context: context, title: 'المتشابهات', navTo: MotshabhatScreen(), icon:Icons.ballot),
+                  Expanded(child: firstScreenItem(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque)),
+                  SizedBox(width: 5.0,),
+                  Expanded(child: firstScreenItem(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts)),
+                  SizedBox(width: 5.0,),
+                  Expanded(child: firstScreenItem(context: context, title: 'المتشابهات', navTo: MotshabhatScreen(), icon:Icons.ballot)),
                 ]
             ),
             SizedBox(height: 10.0,),
             Row(
                 children: [
-                  firstScreenItem(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
-                  SizedBox(width: 10.0,),
-                  firstScreenItem(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
-                  SizedBox(width: 10.0,),
-                  firstScreenItem(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on),                ]
+                  Expanded(child: firstScreenItem(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode)),
+                  SizedBox(width: 5.0,),
+                  Expanded(child: firstScreenItem(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode)),
+                  SizedBox(width: 5.0,),
+                  Expanded(child: firstScreenItem(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on)),                ]
             ),
           ]
       );
     }
     else
-      {
-        return ListView(
-              children: [
-                firstScreenItemV(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'المتشابهات', navTo: MotshabhatScreen(), icon:Icons.ballot),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on),
-              ]
-        );
-      }
+    {
+      return ListView(
+          children: [
+            firstScreenItemV(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
+            SizedBox(height: 20.0,),
+            firstScreenItemV(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
+            SizedBox(height: 20.0,),
+            firstScreenItemV(context: context, title: 'المتشابهات', navTo: MotshabhatScreen(), icon:Icons.ballot),
+            SizedBox(height: 20.0,),
+            firstScreenItemV(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
+            SizedBox(height: 20.0,),
+            firstScreenItemV(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
+            SizedBox(height: 20.0,),
+            firstScreenItemV(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on),
+          ]
+      );
+    }
   }
 }
-
