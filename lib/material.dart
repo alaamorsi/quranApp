@@ -27,6 +27,9 @@ List<AlShaikh> allReaders=[
   AlShaikh(name: 'مشاري راشد العفاسي', image: 'assets/images/15.jpg', url: '8.mp3quran.net/afs'),
   AlShaikh(name: 'عبدالله المطرود', image: 'assets/images/16.jpg', url: '8.mp3quran.net/mtrod'),
   AlShaikh(name: 'اسلام صبحي', image: 'assets/images/17.jpg', url: 'https://ia801406.us.archive.org/12/items/002_20221103_202211'),
+  AlShaikh(name: 'محمد محمود الطبلاوي', image: 'assets/images/18.jpg', url: '12.mp3quran.net/tblawi'),
+  AlShaikh(name: 'حسن صالح', image: 'assets/images/19.jpg', url: 'https://ia903208.us.archive.org/21/items/hassan_mohaed_saleh'),
+  AlShaikh(name: 'ابو بكر الشاطري', image: 'assets/images/20.jpg', url: '11.mp3quran.net/shatri'),
 ];
 
 class QuranChapter {
