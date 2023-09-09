@@ -50,7 +50,7 @@ class _MushafScreenState extends State<MushafScreen> {
         elevation: 5.0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
-            color: cardColor,
+            color: Colors.blueGrey.shade700,
           ),
         ),
       ),

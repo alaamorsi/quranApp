@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/our_widgets.dart';
-import 'package:quran_app/consts.dart';
 
 class Masbaha extends StatefulWidget {
 
