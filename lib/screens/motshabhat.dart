@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
-import 'package:quran_app/our_widgets.dart';
 import '../cache_helper.dart';
 import '../consts.dart';
 import '../material.dart';
@@ -27,10 +26,12 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
 
   final String pdfAssetPath = 'assets/motshabhat.pdf';
   final Completer<PDFViewController> _pdfViewController = Completer<PDFViewController>();
+  late PDFViewController shot;
+
   @override
   Widget build(BuildContext context) {
     haveBookMark = CacheHelper.getData(key: 'haveBookMark')??false;
-    int markedPage = CacheHelper.getData(key: 'motshabhatMark')??null;
+    int markedPage = CacheHelper.getData(key: 'motshabhatMark')??0;
 
     return Scaffold(
       // appBar: myAppBar(context: context, title: 'المتشابهات'),
@@ -64,11 +65,12 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
         swipeHorizontal: true,
         autoSpacing: false,
         pageFling: false,
-        defaultPage: quraanMotshabhat[0].pageNumber,
+        defaultPage: markedPage,
         onPageChanged: (int? current, int? total) =>
-            indexing(chapter: allQuraanMotshabhat, isHere: select, index: current),
+            onChange(chapter: allQuraanMotshabhat, isHere: select, page: current!+1),
         onViewCreated: (PDFViewController pdfViewController) async {
           _pdfViewController.complete(pdfViewController);
+          shot = pdfViewController;
         },
       ).fromAsset(pdfAssetPath),
       floatingActionButton: FutureBuilder<PDFViewController>(
@@ -86,12 +88,12 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
                       heroTag: 'bookmark',
                       child: Icon(Icons.bookmark_add),
                       onPressed: () async {
-                        final PDFViewController pdfController = snapshot.data!;
-                        final int currentPage = (await pdfController.getCurrentPage())!;
+                        int currentPage = shot.getCurrentPage() as int;
                         if (haveBookMark == true) {
-                          await pdfController.setPage(currentPage);
-                        }
-                        else {
+                          setState(() {
+                            shot.setPage(currentPage);
+                          });
+                        } else {
                           setState(() {
                             haveBookMark= !haveBookMark;
                             markedPage = currentPage;
@@ -116,14 +118,14 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
     required int? index}) =>
       ListTile(
         selected: isHere[index!] ? true : false,
-        tileColor: Colors.green,
+        selectedTileColor: Colors.blueGrey.shade900,
+        tileColor: Colors.blueGrey,
         title: Center(child: Text(chapter[index].nameArabic,
-          style: TextStyle(fontSize: 18.0,
-              color: isHere[index] ? Colors.green.shade900 : Colors.white),)),
+          style: TextStyle(fontSize: 18.0, color:Colors.white),)),
         onTap: () async{
-          onChange(chapter: chapter,
-              isHere: isHere,
-              page: chapter[index].pageNumber);
+          int page = chapter[index].pageNumber-1;
+          onChange(chapter: chapter, isHere: isHere, page: chapter[index].pageNumber);
+          shot.setPage(page);
         },
       );
 

@@ -27,14 +27,14 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown.shade300,
+      backgroundColor: Colors.blueGrey.shade300,
       appBar: AppBar(
         title: Text(
           'البحث',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
         ),
         centerTitle: true,
-        backgroundColor: Colors.brown.shade900,
+        backgroundColor: Colors.blueGrey.shade700,
         elevation: 0.0,
       ),
       body: Padding(
@@ -47,13 +47,13 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
               children: [
                 TextFormField(
                   controller: searchController,
-                  cursorColor: Colors.brown.shade900,
+                  cursorColor: Colors.blueGrey.shade100,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search,color: Colors.brown.shade900,),
+                    prefixIcon: Icon(Icons.search,color: Colors.blueGrey.shade700,),
                     hintText: '  ابحث عن السورة',
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide(color: Colors.brown.shade900,width: 2.0,),
+                      borderSide: BorderSide(color: Colors.blueGrey.shade900,width: 2.0,),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -100,7 +100,7 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
   Widget buildQuranItem(QuranChapter chapter, AlShaikh shaikh) =>
       Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0,), color: Colors.brown[800],
+          borderRadius: BorderRadius.circular(20.0,), color: Colors.blueGrey.shade700,
         ),
         child: InkWell(
           onTap: () {
@@ -118,7 +118,7 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7.0,),
                     color: Colors.white,),
-                  child: Icon(Icons.add,color: Colors.brown),
+                  child: Icon(Icons.add,color: Colors.blueGrey),
                 ),
                 Spacer(),
                 Text(

@@ -23,8 +23,8 @@ class _MasbahaState extends State<Masbaha> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Colors.green.shade300,
-                Colors.green
+                Colors.blueGrey.shade300,
+                Colors.blueGrey.shade600
               ],
           ),
         ),
@@ -36,7 +36,7 @@ class _MasbahaState extends State<Masbaha> {
                 height: 350.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50.0),
-                  color: Colors.brown.shade900,
+                  color: Colors.blueGrey.shade900,
                   image: DecorationImage(image: AssetImage('assets/background/b2.jpg'),fit: BoxFit.cover),
                 ),
                 child: Column(
@@ -74,7 +74,7 @@ class _MasbahaState extends State<Masbaha> {
                             });
                           },
                           shape: CircleBorder(),
-                          color: Colors.brown.shade300,
+                          color: Colors.blueGrey.shade300,
                           minWidth: 70,height: 70,
                           child: Text('',style: TextStyle(fontSize: 60.0,color: Colors.grey),),
                         ),
@@ -86,7 +86,7 @@ class _MasbahaState extends State<Masbaha> {
                             });
                           },
                           shape: CircleBorder(),
-                          color: Colors.brown.shade300,
+                          color: Colors.blueGrey.shade300,
                           minWidth:20,height: 20,
                           child: Text('.',style: TextStyle(fontSize: 10.0,color: Colors.grey),),
                         ),

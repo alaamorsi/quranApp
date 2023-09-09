@@ -14,7 +14,7 @@ class MushafScreen extends StatefulWidget {
 class _MushafScreenState extends State<MushafScreen> {
 
   List<QuranChapter> quran = hollyQuraan;
-  List<bool> select = [
+  List<bool> isSelect = [
     false, false, false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false, false, false, false,
@@ -30,10 +30,12 @@ class _MushafScreenState extends State<MushafScreen> {
   ];
   final String pdfAssetPath = 'assets/Mushaf.pdf';
   final Completer<PDFViewController> _pdfViewController = Completer<PDFViewController>();
+  late PDFViewController shot;
+
   @override
   Widget build(BuildContext context) {
     haveQuranBM = CacheHelper.getData(key: 'haveQuranBM')??false;
-    int markedPage = CacheHelper.getData(key: 'mushafMark')??null;
+    int markedPage = CacheHelper.getData(key: 'mushafMark')??0;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: Icon(Icons.arrow_back),onPressed:()async{
@@ -55,9 +57,9 @@ class _MushafScreenState extends State<MushafScreen> {
       endDrawer: Drawer(
         width: 180.0,
         child: ListView.separated(
-          itemBuilder: (context, index) => indexing(chapter:quran, isHere: select, index: index),
+          itemBuilder: (context, index) => indexing(chapter:quran, isHere: isSelect, index: index),
           separatorBuilder: (context, index) => Container(height: 1, color: Colors.white70,),
-          itemCount: quraanMotshabhat.length,
+          itemCount: quran.length,
         ),
       ),
       body: PDF(
@@ -65,17 +67,20 @@ class _MushafScreenState extends State<MushafScreen> {
         swipeHorizontal: true,
         autoSpacing: false,
         pageFling: false,
-        defaultPage: quraanMotshabhat[0].pageNumber,
+        defaultPage: markedPage,
         onPageChanged: (int? current, int? total) =>
-            indexing(chapter: quran, isHere: select, index: current),
+            onChange(chapter: quran, isHere: isSelect,page: current!+1),
         onViewCreated: (PDFViewController pdfViewController) async {
           _pdfViewController.complete(pdfViewController);
+          shot = pdfViewController;
         },
       ).fromAsset(pdfAssetPath),
       floatingActionButton: FutureBuilder<PDFViewController>(
         future: _pdfViewController.future,
         builder: (_, AsyncSnapshot<PDFViewController> snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
+            // final PDFViewController pdfController = snapshot.data!;
+            // shot = pdfController ;
             return Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -83,13 +88,13 @@ class _MushafScreenState extends State<MushafScreen> {
                 FloatingActionButton(
                   heroTag: 'haveQuranBM',
                   child: Icon(Icons.bookmark_add),
-                  onPressed: () async {
-                    final PDFViewController pdfController = snapshot.data!;
-                    final int currentPage = (await pdfController.getCurrentPage())!;
+                  onPressed: () {
+                    int currentPage = shot.getCurrentPage() as int;
                     if (haveQuranBM == true) {
-                      await pdfController.setPage(currentPage);
-                    }
-                    else {
+                      setState(() {
+                        shot.setPage(currentPage);
+                      });
+                    }else {
                       setState(() {
                         haveQuranBM= !haveQuranBM;
                         markedPage = currentPage;
@@ -112,14 +117,14 @@ class _MushafScreenState extends State<MushafScreen> {
     required int? index}) =>
       ListTile(
         selected: isHere[index!] ? true : false,
-        tileColor: Colors.brown,
+        selectedTileColor: Colors.blueGrey.shade900,
+        tileColor: Colors.blueGrey,
         title: Center(child: Text(chapter[index].nameArabic,
-          style: TextStyle(fontSize: 18.0,
-              color: isHere[index] ? Colors.brown : Colors.white),)),
-        onTap: () async{
-          onChange(chapter: chapter,
-              isHere: isHere,
-              page: chapter[index].pageNumber);
+          style: TextStyle(fontSize: 18.0, color:Colors.white),)),
+        onTap: () {
+          int page = chapter[index].pageNumber-1;
+          onChange(chapter: chapter, isHere: isHere, page: chapter[index].pageNumber);
+          shot.setPage(page);
         },
       );
 

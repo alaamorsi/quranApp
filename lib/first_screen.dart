@@ -24,8 +24,8 @@ class _FirstScreenState extends State<FirstScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.green.shade300,
-              Colors.green
+              Colors.blueGrey.shade300,
+              Colors.blueGrey.shade600
             ],
           ),
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'consts.dart';
 
 ////////////////////////////////////////////
@@ -28,7 +27,7 @@ PreferredSizeWidget myAppBar({
   elevation: 5.0,
   flexibleSpace: Container(
     decoration: BoxDecoration(
-        color: cardColor,
+        color: Colors.blueGrey.shade700,
     ),
   ),
 );
@@ -44,7 +43,7 @@ Widget firstScreenItem({required context,required String title,required IconData
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: defaultColor,
+            color: Colors.blueGrey.shade700,
           ),
           child: Row(
             children: [
@@ -79,13 +78,13 @@ Widget firstScreenItemV({required context,required String title,required IconDat
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: cardColor,
+            color: Colors.blueGrey.shade700,
           ),
           child: Column(
             children: [
-              SizedBox(width: 20.0,),
+              SizedBox(height: 10.0,),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: [
                     Icon(icon,size: 35.0,color: Colors.white,),
@@ -94,7 +93,7 @@ Widget firstScreenItemV({required context,required String title,required IconDat
                   ]
                 ),
               ),
-              SizedBox(width: 20.0,),
+              SizedBox(height: 10.0,),
             ]
           ),
         ),
@@ -107,7 +106,7 @@ Widget qaraaItem({required context,required List from,required int index,require
       height: 50.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(13.0,),
-        color: cardColor,
+        color: Colors.blueGrey.shade700,
       ),
       child: InkWell(
         onTap: () {
@@ -127,7 +126,7 @@ Widget qaraaItem({required context,required List from,required int index,require
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0,),
                   color: Colors.white,),
-                child: Icon(Icons.add,color: Colors.green.shade900),
+                child: Icon(Icons.add,color: Colors.blueGrey.shade900),
               ),
               Spacer(),
               Text(
@@ -147,7 +146,7 @@ Widget chapterItem({required context,required List from,required int index,requi
       height: 50.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(13.0,),
-        color: cardColor,
+        color: Colors.blueGrey.shade700,
       ),
       child: InkWell(
         onTap: () {
@@ -167,7 +166,7 @@ Widget chapterItem({required context,required List from,required int index,requi
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0,),
                   color: Colors.white,),
-                child: Icon(Icons.add,color: Colors.green.shade900),
+                child: Icon(Icons.add,color: Colors.blueGrey.shade900),
               ),
               Spacer(),
               Text(

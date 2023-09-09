@@ -126,8 +126,8 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Colors.brown[200]!,
-                Colors.brown,
+                Colors.blueGrey.shade300,
+                Colors.blueGrey.shade600
               ]
           ),
         ),
