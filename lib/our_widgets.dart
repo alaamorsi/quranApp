@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 
+import 'consts.dart';
+
 ////////////////////////////////////////////
 PreferredSizeWidget myAppBar({
   required BuildContext context,
   required String title,
-  String backImage ='assets/background/b0.jpg',
   bool iconButton =false,
   IconData? icon,
+  bool anotherButton =false,
+  IconData? anotherIcon,
+  Function? function,
   navScreen})=>AppBar(
   title: Text(
     title,
-    style: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'nor', fontSize: 28.0),),
+    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),),
   actions: [
     if(iconButton)
       IconButton(
           onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => navScreen));},
           icon: Icon(icon)
       ),
+    if(anotherButton)
+      IconButton(onPressed: (){function!();}, icon: Icon(anotherIcon))
   ],
   centerTitle: true,
   elevation: 5.0,
   flexibleSpace: Container(
     decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(backImage),
-            fit: BoxFit.cover
-        )
+        color: cardColor,
     ),
   ),
 );
@@ -41,23 +44,25 @@ Widget firstScreenItem({required context,required String title,required IconData
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            image: DecorationImage(image: AssetImage('assets/background/b3.jpg'),fit: BoxFit.cover),
+            color: defaultColor,
           ),
           child: Row(
             children: [
+              Spacer(),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(icon,size: 30.0,color: Colors.white,),
                     SizedBox(height: 5.0,),
-                    Text(title,style: TextStyle(color: Colors.white,fontFamily: 'nor',fontSize: 21.0),),
-                  ],
+                    Text(title,style: TextStyle(color: Colors.white,fontSize: 20.0),),
+                  ]
                 ),
               ),
-            ],
+              Spacer(),
+            ]
           ),
         ),
       ),
@@ -74,10 +79,11 @@ Widget firstScreenItemV({required context,required String title,required IconDat
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            image: DecorationImage(image: AssetImage('assets/background/b3.jpg'),fit: BoxFit.cover),
+            color: cardColor,
           ),
           child: Column(
             children: [
+              SizedBox(width: 20.0,),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
@@ -88,6 +94,7 @@ Widget firstScreenItemV({required context,required String title,required IconDat
                   ]
                 ),
               ),
+              SizedBox(width: 20.0,),
             ]
           ),
         ),
@@ -100,7 +107,7 @@ Widget qaraaItem({required context,required List from,required int index,require
       height: 50.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(13.0,),
-        image: DecorationImage(image: AssetImage('assets/background/b3.jpg'),fit: BoxFit.cover),
+        color: cardColor,
       ),
       child: InkWell(
         onTap: () {
@@ -120,7 +127,7 @@ Widget qaraaItem({required context,required List from,required int index,require
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0,),
                   color: Colors.white,),
-                child: Icon(Icons.add,color: Colors.brown),
+                child: Icon(Icons.add,color: Colors.green.shade900),
               ),
               Spacer(),
               Text(
@@ -128,7 +135,7 @@ Widget qaraaItem({required context,required List from,required int index,require
                 style: TextStyle(color: Colors.white, fontSize: 22.0),
               ),
               SizedBox(width: 5.0,),
-            ],
+            ]
           ),
         ),
       ),
@@ -140,7 +147,7 @@ Widget chapterItem({required context,required List from,required int index,requi
       height: 50.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(13.0,),
-        image: DecorationImage(image: AssetImage('assets/background/b3.jpg'),fit: BoxFit.cover),
+        color: cardColor,
       ),
       child: InkWell(
         onTap: () {
@@ -160,7 +167,7 @@ Widget chapterItem({required context,required List from,required int index,requi
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0,),
                   color: Colors.white,),
-                child: Icon(Icons.add,color: Colors.brown),
+                child: Icon(Icons.add,color: Colors.green.shade900),
               ),
               Spacer(),
               Text(

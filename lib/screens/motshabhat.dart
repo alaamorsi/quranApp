@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:pdfx/pdfx.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:quran_app/our_widgets.dart';
+import '../cache_helper.dart';
+import '../consts.dart';
 import '../material.dart';
 
 class MotshabhatScreen extends StatefulWidget {
@@ -10,8 +13,7 @@ class MotshabhatScreen extends StatefulWidget {
 }
 
 class MotshabhatScreenState extends State<MotshabhatScreen> {
-
-  List<Motshabhat> motshabhat = quraanMotshabhat;
+  List<Motshabhat> allQuraanMotshabhat = quraanMotshabhat;
   List<bool> select = [
     false, false, false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false, false, false, false,
@@ -22,124 +24,115 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
     false, false, false, false, false, false, false, false, false, false,
     false, false, false, false, false, false, false,
   ];
-  final pdfController = PdfController(
-    document: PdfDocument.openAsset('assets/motshabhat.pdf'),
-  );
 
+  final String pdfAssetPath = 'assets/motshabhat.pdf';
+  final Completer<PDFViewController> _pdfViewController = Completer<PDFViewController>();
   @override
   Widget build(BuildContext context) {
+    haveBookMark = CacheHelper.getData(key: 'haveBookMark')??false;
+    int markedPage = CacheHelper.getData(key: 'motshabhatMark')??null;
+
     return Scaffold(
+      // appBar: myAppBar(context: context, title: 'المتشابهات'),
+      appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back),onPressed:()async{
+          await CacheHelper.saveData(key: 'haveBookMark', value: haveBookMark);
+          await CacheHelper.saveData(key: 'motshabhatMark', value: markedPage);
+          Navigator.pop(context);
+        },),
+        title: Text(
+          'المتشابهات',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),),
+        centerTitle: true,
+        elevation: 5.0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: cardColor,
+          ),
+        ),
+      ),
       endDrawer: Drawer(
         width: 180.0,
         child: ListView.separated(
-          itemBuilder: (context, index) =>
-              indexing(motshabhat: motshabhat, isHere: select, index: index),
-          separatorBuilder: (context, index) =>
-              Container(height: 1, color: Colors.white70,),
-          itemCount: motshabhat.length,
+          itemBuilder: (context, index) => indexing(chapter:allQuraanMotshabhat, isHere: select, index: index),
+          separatorBuilder: (context, index) => Container(height: 1, color: Colors.white70,),
+          itemCount: quraanMotshabhat.length,
         ),
       ),
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   backgroundColor: Colors.brown.shade900,
-      //   elevation: 0.0,
-      //   title: Text('المصحف',
-      //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),),
-      // ),
-      appBar: myAppBar(context: context, title: 'متشابهات'),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.white54,
-              Colors.white60,
-            ],
-          ),
-        ),
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-            children: [
-              Expanded(
-                child: PdfView(
-                  reverse: true,
-                  controller: pdfController,
-                  // renderer: (PdfPage page) => page.render(
-                  //   width: page.width *1.1,
-                  //   height: page.height * 1.3,
-                  // ),
-                  onPageChanged: (page) {
-                    onChange(motshabhat: motshabhat, isHere: select, page: page);
-                    pdfController.initialPage=2;
-                  },
+      body: PDF(
+        enableSwipe: true,
+        swipeHorizontal: true,
+        autoSpacing: false,
+        pageFling: false,
+        defaultPage: quraanMotshabhat[0].pageNumber,
+        onPageChanged: (int? current, int? total) =>
+            indexing(chapter: allQuraanMotshabhat, isHere: select, index: current),
+        onViewCreated: (PDFViewController pdfViewController) async {
+          _pdfViewController.complete(pdfViewController);
+        },
+      ).fromAsset(pdfAssetPath),
+      floatingActionButton: FutureBuilder<PDFViewController>(
+        future: _pdfViewController.future,
+        builder: (_, AsyncSnapshot<PDFViewController> snapshot) {
+          if (snapshot.hasData && snapshot.data != null) {
+            return Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    FloatingActionButton(
+                      heroTag: 'bookmark',
+                      child: Icon(Icons.bookmark_add),
+                      onPressed: () async {
+                        final PDFViewController pdfController = snapshot.data!;
+                        final int currentPage = (await pdfController.getCurrentPage())!;
+                        if (haveBookMark == true) {
+                          await pdfController.setPage(currentPage);
+                        }
+                        else {
+                          setState(() {
+                            haveBookMark= !haveBookMark;
+                            markedPage = currentPage;
+                          });
+                        }
+                      },
+                    ),
+                  ],
                 ),
-              ),
-              Container(
-                height: 60.0,
-                color: Colors.brown,
-                child: Row(
-                    children: [
-                      SizedBox(width: 15.0,),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          pdfController.nextPage(
-                              duration: Duration(milliseconds: 250),
-                              curve: Curves.easeIn);
-                        },
-                      ),
-                      SizedBox(width: 15.0,),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          pdfController.previousPage(
-                              duration: Duration(milliseconds: 250),
-                              curve: Curves.easeOut);
-                        },
-                      ),
-                      SizedBox(width: 15.0,),
-                    ]
-                ),
-              ),
-            ]
-        ),
+              ],
+            );
+          }
+          return const SizedBox();
+        },
       ),
     );
   }
 
   Widget indexing({
-    required List<Motshabhat> motshabhat,
+    required List<Motshabhat> chapter,
     required List<bool> isHere,
-    required int index}) =>
+    required int? index}) =>
       ListTile(
-        selected: isHere[index] ? true : false,
-        tileColor: Colors.brown,
-        title: Center(child: Text(motshabhat[index].nameArabic,
+        selected: isHere[index!] ? true : false,
+        tileColor: Colors.green,
+        title: Center(child: Text(chapter[index].nameArabic,
           style: TextStyle(fontSize: 18.0,
-              color: isHere[index] ? Colors.brown : Colors.white),)),
-        onTap: () {
-          pdfController.jumpToPage(motshabhat[index].pageNumber);
-          onChange(motshabhat: motshabhat,
+              color: isHere[index] ? Colors.green.shade900 : Colors.white),)),
+        onTap: () async{
+          onChange(chapter: chapter,
               isHere: isHere,
-              page: motshabhat[index].pageNumber);
+              page: chapter[index].pageNumber);
         },
       );
 
   void onChange({
-    required List<Motshabhat> motshabhat,
+    required List<Motshabhat> chapter,
     required List<bool> isHere,
     required int page}) {
-    for (int i = 0; i < motshabhat.length; i++) {
-      if (page >= motshabhat[i].pageNumber && page < motshabhat[i + 1].pageNumber) {
+    for (int i = 0; i < chapter.length; i++) {
+      if (page >= chapter[i].pageNumber && page < chapter[i + 1].pageNumber) {
         for (int j = 0; j < isHere.length; j++) {
           if (j != i) {
             isHere[j] = false;
@@ -153,9 +146,9 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
         });
         break;
       }
-      else if (page == motshabhat[i].pageNumber) {
+      else if (page == chapter[i].pageNumber) {
         for (int j = 0; j < isHere.length; j++) {
-          if (page == motshabhat[j].pageNumber) {
+          if (page == chapter[j].pageNumber) {
             setState(() {
               isHere[j] = true;
             });

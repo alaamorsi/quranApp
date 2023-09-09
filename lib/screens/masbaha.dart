@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/our_widgets.dart';
+import 'package:quran_app/consts.dart';
 
 class Masbaha extends StatefulWidget {
 
@@ -22,9 +23,9 @@ class _MasbahaState extends State<Masbaha> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Colors.brown.shade300,
-                Colors.brown.shade600,
-              ]
+                Colors.green.shade300,
+                Colors.green
+              ],
           ),
         ),
         child: Padding(

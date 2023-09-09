@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:pdfx/pdfx.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:quran_app/cache_helper.dart';
 import 'package:quran_app/our_widgets.dart';
+import '../consts.dart';
 import '../material.dart';
 
 class MushafScreen extends StatefulWidget {
@@ -27,144 +29,107 @@ class _MushafScreenState extends State<MushafScreen> {
     false, false, false, false, false, false, false, false, false, false,
     false, false, false, false,
   ];
-  final pdfController = PdfController(
-    document: PdfDocument.openAsset('assets/Mushaf.pdf'),
-  );
-
+  final String pdfAssetPath = 'assets/Mushaf.pdf';
+  final Completer<PDFViewController> _pdfViewController = Completer<PDFViewController>();
   @override
   Widget build(BuildContext context) {
-    bool isMarked = CacheHelper.getData(key: 'isMarked') ?? false;
+    haveQuranBM = CacheHelper.getData(key: 'haveQuranBM')??false;
+    int markedPage = CacheHelper.getData(key: 'mushafMark')??null;
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back),onPressed:()async{
+          await CacheHelper.saveData(key: 'haveQuranBM', value: haveQuranBM);
+          await CacheHelper.saveData(key: 'mushafMark', value: markedPage);
+          Navigator.pop(context);
+        },),
+        title: Text(
+          'لمصحف',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),),
+        centerTitle: true,
+        elevation: 5.0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: cardColor,
+          ),
+        ),
+      ),
       endDrawer: Drawer(
         width: 180.0,
         child: ListView.separated(
-          itemBuilder: (context, index) =>
-              indexing(currentChapter: quran, isHere: select, index: index),
-          separatorBuilder: (context, index) =>
-              Container(height: 1, color: Colors.white70,),
-          itemCount: quran.length,
+          itemBuilder: (context, index) => indexing(chapter:quran, isHere: select, index: index),
+          separatorBuilder: (context, index) => Container(height: 1, color: Colors.white70,),
+          itemCount: quraanMotshabhat.length,
         ),
       ),
-      appBar: myAppBar(context: context, title:'المصحف'),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.white54,
-              Colors.white60,
-            ],
-          ),
-        ),
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-            children: [
-              Expanded(
-                child: PdfView(
-                  reverse: true,
-                  controller: pdfController,
-                  renderer: (PdfPage page) => page.render(
-                    width: page.width *1.1,
-                    height: page.height * 1.3,
-                    quality: 100,
-                  ),
-                  onPageChanged: (page) {
-                    onChange(currentChapter: quran, isHere: select, page: page);
+      body: PDF(
+        enableSwipe: true,
+        swipeHorizontal: true,
+        autoSpacing: false,
+        pageFling: false,
+        defaultPage: quraanMotshabhat[0].pageNumber,
+        onPageChanged: (int? current, int? total) =>
+            indexing(chapter: quran, isHere: select, index: current),
+        onViewCreated: (PDFViewController pdfViewController) async {
+          _pdfViewController.complete(pdfViewController);
+        },
+      ).fromAsset(pdfAssetPath),
+      floatingActionButton: FutureBuilder<PDFViewController>(
+        future: _pdfViewController.future,
+        builder: (_, AsyncSnapshot<PDFViewController> snapshot) {
+          if (snapshot.hasData && snapshot.data != null) {
+            return Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                FloatingActionButton(
+                  heroTag: 'haveQuranBM',
+                  child: Icon(Icons.bookmark_add),
+                  onPressed: () async {
+                    final PDFViewController pdfController = snapshot.data!;
+                    final int currentPage = (await pdfController.getCurrentPage())!;
+                    if (haveQuranBM == true) {
+                      await pdfController.setPage(currentPage);
+                    }
+                    else {
+                      setState(() {
+                        haveQuranBM= !haveQuranBM;
+                        markedPage = currentPage;
+                      });
+                    }
                   },
                 ),
-              ),
-              Container(
-                height: 60.0,
-                color: Colors.brown,
-                child: Row(
-                    children: [
-                      SizedBox(width: 15.0,),
-                      IconButton(
-                        icon: Icon(
-                          Icons.bookmark,
-                          color: isMarked ? Colors.blue : Colors.white,
-                        ),
-                        onPressed: () {
-                          if (isMarked == true) {
-                            setState(() {
-                              int pageNumber = CacheHelper.getData(
-                                  key: 'markedPage');
-                              pdfController.jumpToPage(pageNumber);
-                              CacheHelper.saveData(
-                                  key: 'isMarked', value: false);
-                            });
-                          }
-                          else {
-                            setState(() {
-                              int pageNumber = pdfController.page;
-                              CacheHelper.saveData(
-                                  key: 'markedPage', value: pageNumber);
-                              CacheHelper.saveData(
-                                  key: 'isMarked', value: true);
-                            });
-                          }
-                        },
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          pdfController.nextPage(
-                              duration: Duration(milliseconds: 250),
-                              curve: Curves.easeIn);
-                        },
-                      ),
-                      SizedBox(width: 15.0,),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          pdfController.previousPage(
-                              duration: Duration(milliseconds: 250),
-                              curve: Curves.easeOut);
-                        },
-                      ),
-                      SizedBox(width: 15.0,),
-                    ]
-                ),
-              ),
-            ]
-        ),
+              ],
+            );
+          }
+          return const SizedBox();
+        },
       ),
     );
   }
 
   Widget indexing({
-    required List<QuranChapter> currentChapter,
+    required List<QuranChapter> chapter,
     required List<bool> isHere,
-    required int index}) =>
+    required int? index}) =>
       ListTile(
-        selected: isHere[index] ? true : false,
+        selected: isHere[index!] ? true : false,
         tileColor: Colors.brown,
-        title: Center(child: Text(currentChapter[index].nameArabic,
+        title: Center(child: Text(chapter[index].nameArabic,
           style: TextStyle(fontSize: 18.0,
               color: isHere[index] ? Colors.brown : Colors.white),)),
-        onTap: () {
-          pdfController.jumpToPage(currentChapter[index].pageNumber);
-          onChange(currentChapter: currentChapter,
+        onTap: () async{
+          onChange(chapter: chapter,
               isHere: isHere,
-              page: currentChapter[index].pageNumber);
+              page: chapter[index].pageNumber);
         },
       );
 
   void onChange({
-    required List<QuranChapter> currentChapter,
+    required List<QuranChapter> chapter,
     required List<bool> isHere,
     required int page}) {
-    for (int i = 0; i < quran.length; i++) {
-      if (page >= currentChapter[i].pageNumber && page < currentChapter[i + 1].pageNumber) {
+    for (int i = 0; i < chapter.length; i++) {
+      if (page >= chapter[i].pageNumber && page < chapter[i + 1].pageNumber) {
         for (int j = 0; j < isHere.length; j++) {
           if (j != i) {
             isHere[j] = false;
@@ -178,9 +143,9 @@ class _MushafScreenState extends State<MushafScreen> {
         });
         break;
       }
-      else if (page == currentChapter[i].pageNumber) {
+      else if (page == chapter[i].pageNumber) {
         for (int j = 0; j < isHere.length; j++) {
-          if (page == currentChapter[j].pageNumber) {
+          if (page == chapter[j].pageNumber) {
             setState(() {
               isHere[j] = true;
             });

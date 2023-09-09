@@ -43,9 +43,8 @@ dependencies:
   assets_audio_player: ^3.1.0
   just_audio: ^0.9.30
   pdfx: ^2.4.0
-  syncfusion_flutter_pdfviewer: ^22.2.11
+  flutter_cached_pdfview: ^0.4.2
   conditional_builder_null_safety: ^0.0.6
-  flutter_side_menu: ^0.4.0
 
 
 dev_dependencies:

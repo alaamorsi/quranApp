@@ -18,8 +18,8 @@ class ElQuraaScreen extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Colors.brown[200]!,
-              Colors.brown,
+              Colors.green.shade300,
+              Colors.green
             ],
           ),
         ),
