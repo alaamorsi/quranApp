@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:quran_app/cache_helper.dart';
-import 'package:quran_app/our_widgets.dart';
 import '../consts.dart';
 import '../material.dart';
 
