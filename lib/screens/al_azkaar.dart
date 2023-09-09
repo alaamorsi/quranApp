@@ -117,7 +117,7 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
           widget.time,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),),
         centerTitle: true,
-        backgroundColor: Colors.brown.shade900,
+        backgroundColor: Colors.blueGrey.shade700,
         elevation: 0.0,),
       body: Container(
         width: double.infinity,
@@ -159,9 +159,8 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            Colors.brown[300]!,
-                            Colors.brown[700]!,
-                            Colors.brown[300]!,
+                            Colors.blueGrey.shade500,
+                            Colors.blueGrey.shade900,
                           ]
                       ),
                     ),
@@ -178,8 +177,8 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              Colors.brown[300]!,
-                              Colors.brown[700]!,
+                              Colors.blueGrey.shade500,
+                              Colors.blueGrey.shade900,
                             ]
                         ),
                       ),
@@ -197,7 +196,7 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
                       Container(
                         width: 50.0,
                         decoration: BoxDecoration(
-                          color: Colors.brown[800],
+                          color: Colors.blueGrey.shade800,
                           borderRadius: BorderRadius.circular(5.0),),
                         child: IconButton(onPressed: (){
                           if(numOfZekr  == 0 ) {
@@ -221,7 +220,7 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
                       Container(
                         width: 100.0,
                         decoration: BoxDecoration(
-                          color: Colors.brown[800],
+                          color: Colors.blueGrey.shade800,
                           borderRadius: BorderRadius.circular(5.0),),
                         child: TextButton(onPressed: (){
                           if(plus <= elAzkarNumber[numOfZekr]){
@@ -245,7 +244,7 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
                       Container(
                         width: 50.0,
                         decoration: BoxDecoration(
-                          color: Colors.brown[800],
+                          color: Colors.blueGrey.shade800,
                           borderRadius: BorderRadius.circular(5.0),),
                         child: IconButton(onPressed: (){
                           if(numOfZekr +1  < elAzkarNumber.length) {

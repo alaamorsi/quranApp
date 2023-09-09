@@ -48,14 +48,14 @@ Widget firstScreenItem({required context,required String title,required IconData
             children: [
               Spacer(),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                padding: const EdgeInsets.symmetric(vertical: 35.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(icon,size: 30.0,color: Colors.white,),
+                    Icon(icon,size: 35.0,color: Colors.white,),
                     SizedBox(height: 5.0,),
-                    Text(title,style: TextStyle(color: Colors.white,fontSize: 20.0),),
+                    Text(title,style: TextStyle(color: Colors.white,fontSize: 22.0),),
                   ]
                 ),
               ),

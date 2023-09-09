@@ -47,20 +47,25 @@ class _FirstScreenState extends State<FirstScreen> {
             Row(
                 children: [
                   firstScreenItem(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
-                  SizedBox(width: 10.0,),
+                  SizedBox(width: 20.0,),
                   firstScreenItem(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
-                  SizedBox(width: 10.0,),
-                  firstScreenItem(context: context, title: 'المتشابهات', navTo: MotshabhatScreen(), icon:Icons.ballot),
                 ]
             ),
-            SizedBox(height: 10.0,),
+            SizedBox(height: 20.0,),
+            Row(
+              children: [
+                firstScreenItem(context: context, title: 'المتشابهات', navTo: MotshabhatScreen(), icon:Icons.ballot),
+                SizedBox(width: 20.0,),
+                firstScreenItem(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on),
+              ],
+            ),
+            SizedBox(height: 20.0,),
             Row(
                 children: [
                   firstScreenItem(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
-                  SizedBox(width: 10.0,),
+                  SizedBox(width: 20.0,),
                   firstScreenItem(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
-                  SizedBox(width: 10.0,),
-                  firstScreenItem(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on),                ]
+                ]
             ),
           ]
       );
