@@ -132,7 +132,7 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(25.0),
           child: InkWell(
             onTap: ()
             {
@@ -182,11 +182,9 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
                             ]
                         ),
                       ),
-                      child: Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Text('${elAzkar[numOfZekr]}',style: TextStyle(fontSize: 20.0,color: Colors.white),),
-                        ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text('${elAzkar[numOfZekr]}',style: TextStyle(fontSize: 20.0,color: Colors.white),),
                       ),
                   ),
                   Spacer(),

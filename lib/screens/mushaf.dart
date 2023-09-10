@@ -44,7 +44,7 @@ class _MushafScreenState extends State<MushafScreen> {
           Navigator.pop(context);
         },),
         title: Text(
-          'لمصحف',
+          'المصحف',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),),
         centerTitle: true,
         elevation: 5.0,
