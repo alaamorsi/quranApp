@@ -99,6 +99,7 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
 
   Widget buildQuranItem(QuranChapter chapter, AlShaikh shaikh) =>
       Container(
+        height: 50.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0,), color: Colors.blueGrey.shade700,
         ),

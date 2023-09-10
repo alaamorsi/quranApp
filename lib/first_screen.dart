@@ -11,12 +11,11 @@ class FirstScreen extends StatefulWidget {
   State<FirstScreen> createState() => _FirstScreenState();
 }
 class _FirstScreenState extends State<FirstScreen> {
-  bool cardV=true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(context: context, title: 'اسلامي',anotherButton: true,anotherIcon: Icons.layers,function: (){setState(() {cardV= !cardV;});}),
+      appBar: myAppBar(context: context, title: 'اسلامي'),
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -31,25 +30,14 @@ class _FirstScreenState extends State<FirstScreen> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: firstDesign(cardV)
-        ),
-      ),
-    );
-  }
-
-  //design for horizental and vertical widgets
-  Widget firstDesign(bool v)
-  {
-    if (v)
-    {
-      return Column(
-          children: [
+          child: Column(
+            children: [
             Row(
-                children: [
-                  firstScreenItem(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
-                  SizedBox(width: 20.0,),
-                  firstScreenItem(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
-                ]
+            children: [
+                firstScreenItem(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
+              SizedBox(width: 20.0,),
+              firstScreenItem(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
+              ]
             ),
             SizedBox(height: 20.0,),
             Row(
@@ -61,33 +49,19 @@ class _FirstScreenState extends State<FirstScreen> {
             ),
             SizedBox(height: 20.0,),
             Row(
-                children: [
-                  firstScreenItem(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
-                  SizedBox(width: 20.0,),
-                  firstScreenItem(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
-                ]
-            ),
-          ]
-      );
-    }
-    else
-      {
-        return ListView(
               children: [
-                firstScreenItemV(context: context, title: 'الأستماع', navTo: ElQuraaScreen(), icon: Icons.mosque),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'المتشابهات', navTo: MotshabhatScreen(), icon:Icons.ballot),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
-                SizedBox(height: 20.0,),
-                firstScreenItemV(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on),
+                firstScreenItem(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
+                SizedBox(width: 20.0,),
+                firstScreenItem(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
               ]
-        );
-      }
+              ),
+            ]
+          ),
+        ),
+      ),
+    );
   }
+
+  //design for horizental and vertical widgets
 }
 

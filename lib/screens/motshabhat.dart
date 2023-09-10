@@ -31,14 +31,14 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
   @override
   Widget build(BuildContext context) {
     haveBookMark = CacheHelper.getData(key: 'haveBookMark')??false;
-    int markedPage = CacheHelper.getData(key: 'motshabhatMark')??0;
+    int markedPage = CacheHelper.getData(key: 'motshabhatMark')??1;
 
     return Scaffold(
       // appBar: myAppBar(context: context, title: 'المتشابهات'),
       appBar: AppBar(
-        leading: IconButton(icon: Icon(Icons.arrow_back),onPressed:()async{
-          await CacheHelper.saveData(key: 'haveBookMark', value: haveBookMark);
-          await CacheHelper.saveData(key: 'motshabhatMark', value: markedPage);
+        leading: IconButton(icon: Icon(Icons.arrow_back),onPressed:(){
+          CacheHelper.saveData(key: 'haveBookMark', value: haveBookMark);
+          CacheHelper.saveData(key: 'motshabhatMark', value: markedPage);
           Navigator.pop(context);
         },),
         title: Text(
