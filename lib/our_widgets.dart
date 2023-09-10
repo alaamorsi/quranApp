@@ -66,39 +66,6 @@ Widget firstScreenItem({required context,required String title,required IconData
       ),
     );
 
-///////////////////////////////////////////////////////////
-Widget firstScreenItemV({required context,required String title,required IconData icon ,required  navTo})=>
-    Expanded(
-      child: InkWell(
-        onTap: (){
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => navTo));
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.blueGrey.shade700,
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: 10.0,),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Row(
-                  children: [
-                    Icon(icon,size: 35.0,color: Colors.white,),
-                    Spacer(),
-                    Text(title,style: TextStyle(color: Colors.white,fontFamily: 'nor',fontSize: 22.0),),
-                  ]
-                ),
-              ),
-              SizedBox(height: 10.0,),
-            ]
-          ),
-        ),
-      ),
-    );
-
 //////////////////////////////////////
 Widget qaraaItem({required context,required List from,required int index,required  navScreen})=>
     Container(
