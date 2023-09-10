@@ -247,4 +247,5 @@ List<Motshabhat> quraanMotshabhat=[
   Motshabhat(nameArabic: "الإنسان",pageNumber: 277),
   Motshabhat(nameArabic: "المرسلات",pageNumber: 278),
   Motshabhat(nameArabic: "جزء عم",pageNumber: 280),
+  Motshabhat(nameArabic: "end",pageNumber: 282),
 ];
