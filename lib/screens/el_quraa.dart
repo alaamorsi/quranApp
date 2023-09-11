@@ -9,7 +9,7 @@ class ElQuraaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(context: context, title: 'تلاوت القرآن الكريم',iconButton: true,icon: Icons.search,navScreen: SearchOfSheikh()),
+      appBar: myAppBar(context: context, title: 'القراء',iconButton: true,icon: Icons.search,navScreen: SearchOfSheikh()),
       body: Container(
         height: double.infinity,
         width: double.infinity,

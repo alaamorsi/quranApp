@@ -30,61 +30,75 @@ class _SearchOfSheikhState extends State<SearchOfSheikh> {
         backgroundColor: Colors.blueGrey.shade700,
         elevation: 0.0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                TextFormField(
-                  controller: searchController,
-                  cursorColor: Colors.blueGrey.shade100,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search,color: Colors.blueGrey.shade100,),
-                    hintText: '  ابحث عن القارئ',
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide(color: Colors.blueGrey.shade700,width: 2.0,),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blueGrey.shade300,
+              Colors.blueGrey.shade600
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextFormField(
+                    controller: searchController,
+                    cursorColor: Colors.blueGrey.shade100,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search,color: Colors.blueGrey.shade100,),
+                      hintText: '  ابحث عن القارئ',
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: BorderSide(color: Colors.blueGrey.shade700,width: 2.0,),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(color: Colors.white,),
+                      ),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(color: Colors.white,),
-                    ),
-                  ),
-                  style: TextStyle(color: Colors.white),
-                  onChanged: (v) {
-                    setState(() {
-                      searchList=[];
-                    });
-                    for(int i =0 ;i < readers.length;i++)
-                    {
-                      final readerName = readers[i].name;
-                      final input =v;
-
-                      if(readerName.contains(input))
+                    style: TextStyle(color: Colors.white),
+                    onChanged: (v) {
+                      setState(() {
+                        searchList=[];
+                      });
+                      for(int i =0 ;i < readers.length;i++)
                       {
-                        setState(() {
-                          searchList.add(readers[i]);
-                        });
+                        final readerName = readers[i].name;
+                        final input =v;
+
+                        if(readerName.contains(input))
+                        {
+                          setState(() {
+                            searchList.add(readers[i]);
+                          });
+                        }
                       }
-                    }
-                  },
-                ),
-                SizedBox(height: 20.0,),
-                ConditionalBuilder(
-                  condition: searchList.isNotEmpty,
-                  builder: (BuildContext context)=>
-                        ListView.separated(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index)=>buildElquraaItem(searchList[index]),
-                          separatorBuilder: (context, index) =>SizedBox(height: 10.0,),
-                          itemCount: searchList.length)
-                  , fallback: (BuildContext context) => Container(),
-                ),
-              ]
+                    },
+                  ),
+                  SizedBox(height: 20.0,),
+                  ConditionalBuilder(
+                    condition: searchList.isNotEmpty,
+                    builder: (BuildContext context)=>
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index)=>buildElquraaItem(searchList[index]),
+                            separatorBuilder: (context, index) =>SizedBox(height: 10.0,),
+                            itemCount: searchList.length)
+                    , fallback: (BuildContext context) => Container(),
+                  ),
+                ]
+            ),
           ),
         ),
       ),
@@ -94,7 +108,7 @@ class _SearchOfSheikhState extends State<SearchOfSheikh> {
     height: 50.0,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(
-        20.0,
+        13.0,
       ),
       color: Colors.blueGrey.shade700,
     ),
