@@ -57,7 +57,7 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
         child: ListView.separated(
           itemBuilder: (context, index) => indexing(chapter:allQuraanMotshabhat, isHere: select, index: index),
           separatorBuilder: (context, index) => Container(height: 1, color: Colors.white70,),
-          itemCount: quraanMotshabhat.length,
+          itemCount: allQuraanMotshabhat.length-1,
         ),
       ),
       body: PDF(
@@ -87,7 +87,7 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
                     FloatingActionButton(
                       heroTag: 'bookmark',
                       child: Icon(Icons.bookmark_add),
-                      onPressed: () async {
+                      onPressed: ()  {
                         int currentPage = shot.getCurrentPage() as int;
                         if (haveBookMark == true) {
                           setState(() {
@@ -122,7 +122,7 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
         tileColor: Colors.blueGrey,
         title: Center(child: Text(chapter[index].nameArabic,
           style: TextStyle(fontSize: 18.0, color:Colors.white),)),
-        onTap: () async{
+        onTap: () {
           int page = chapter[index].pageNumber-1;
           onChange(chapter: chapter, isHere: isHere, page: chapter[index].pageNumber);
           shot.setPage(page);
@@ -132,12 +132,15 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
   void onChange({
     required List<Motshabhat> chapter,
     required List<bool> isHere,
-    required int page}) {
+    required int page
+  }){
     for (int i = 0; i < chapter.length; i++) {
       if (page >= chapter[i].pageNumber && page < chapter[i + 1].pageNumber) {
         for (int j = 0; j < isHere.length; j++) {
           if (j != i) {
-            isHere[j] = false;
+            setState(() {
+              isHere[j] = false;
+            });
           }
           else {
             continue;
@@ -146,21 +149,6 @@ class MotshabhatScreenState extends State<MotshabhatScreen> {
         setState(() {
           isHere[i] = true;
         });
-        break;
-      }
-      else if (page == chapter[i].pageNumber) {
-        for (int j = 0; j < isHere.length; j++) {
-          if (page == chapter[j].pageNumber) {
-            setState(() {
-              isHere[j] = true;
-            });
-          }
-          else{
-            setState(() {
-              isHere[j] = false;
-            });
-          }
-        }
         break;
       }
       else {
