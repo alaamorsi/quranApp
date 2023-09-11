@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quran_app/screens/el_quraa.dart';
 import 'package:quran_app/screens/motshabhat.dart';
 import 'package:quran_app/screens/mushaf.dart';
+import 'package:quran_app/screens/questions.dart';
 import 'screens/al_azkaar.dart';
 import 'screens/masbaha.dart';
 import 'our_widgets.dart';
@@ -39,7 +40,7 @@ class _FirstScreenState extends State<FirstScreen> {
               firstScreenItem(context: context, title: 'المصحف', navTo: MushafScreen(), icon: Icons.import_contacts),
               ]
             ),
-            SizedBox(height: 20.0,),
+            SizedBox(height: 10.0,),
             Row(
               children: [
                 firstScreenItem(context: context, title: 'المتشابهات', navTo: MotshabhatScreen(), icon:Icons.ballot),
@@ -47,7 +48,7 @@ class _FirstScreenState extends State<FirstScreen> {
                 firstScreenItem(context: context, title: 'المسبحة', navTo: Masbaha(), icon:Icons.data_saver_on),
               ],
             ),
-            SizedBox(height: 20.0,),
+            SizedBox(height: 10.0,),
             Row(
               children: [
                 firstScreenItem(context: context, title: 'أذكار الصباح', navTo: MorAndEvenAzkaar(time: 'أذكار الصباح'), icon: Icons.light_mode),
@@ -55,7 +56,15 @@ class _FirstScreenState extends State<FirstScreen> {
                 firstScreenItem(context: context, title: 'أذكار المساء', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.dark_mode),
               ]
               ),
-            ]
+              SizedBox(height: 10.0,),
+            Row(
+              children: [
+                firstScreenItem(context: context, title: 'راجع حفظك', navTo: Questions(), icon: Icons.book_rounded),
+                SizedBox(width: 20.0,),
+                firstScreenItem(context: context, title: 'تعلم الصلاة', navTo: MorAndEvenAzkaar(time: 'أذكار المساء'), icon: Icons.man_sharp),
+              ]
+              ),
+            ],
           ),
         ),
       ),
