@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MorAndEvenAzkaar extends StatefulWidget {
 
   String time;
@@ -85,14 +86,6 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
   ];
   List<int> eveningAzkarNumber=[1,1,3,3,3,1,1,3,4,1,7,3,1,1,3,3,3,1,3,1,1,3,10,3,3,3,3,1,1,100,100,100,];
 
-  List<String> sbha=[
-    'سُبْحـانَ اللهِِ',
-    'الحمد لله',
-    'لا إله إلا الله',
-    'أسْتَغْفِرُ اللهَِ',
-    'الْلَّهُ أَكْبَرُ',
-  ];
-  List<int> sbhaNumber=[1000,1000,1000,1000,1000];
 
   int plus=0;
   int numOfZekr=0;
@@ -184,7 +177,7 @@ class _MorAndEvenAzkaarState extends State<MorAndEvenAzkaar> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: Text('${elAzkar[numOfZekr]}',style: TextStyle(fontSize: 20.0,color: Colors.white),),
+                        child: Text('${elAzkar[numOfZekr]}',style: TextStyle(fontSize: 20.0,color: Colors.white),textAlign: TextAlign.end,),
                       ),
                   ),
                   Spacer(),
