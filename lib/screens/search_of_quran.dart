@@ -98,7 +98,7 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) =>
-                                buildQuranItem(searchList[index], widget.shaikh),
+                                buildQuranItem(searchList[index], widget.shaikh,index),
                             separatorBuilder: (context, index) =>
                                 SizedBox(height: 10.0,),
                             itemCount: searchList.length)
@@ -112,7 +112,7 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
     );
   }
 
-  Widget buildQuranItem(QuranChapter chapter, AlShaikh shaikh) =>
+  Widget buildQuranItem(QuranChapter chapter, AlShaikh shaikh,int index) =>
       Container(
         height: 50.0,
         decoration: BoxDecoration(
@@ -122,7 +122,7 @@ class _SearchOfQuranState extends State<SearchOfQuran> {
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
-                    QuranScreen(chapter: chapter, shaikh: shaikh)));
+                    QuranScreen(chapter: chapter, shaikh: shaikh, index: index,)));
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),

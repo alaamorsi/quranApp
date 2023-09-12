@@ -50,7 +50,7 @@ class QuranListView extends StatelessWidget {
                     itemBuilder: (context, index) =>
                         chapterItem(context: context, from: hollyQuraan, index: index,
                             // navScreen: QuranScreen(chapter: hollyQuraan[index], shaikh: shaikh)),
-                            navScreen: Test(chapter: hollyQuraan[index], shaikh: shaikh, index: index,)),
+                            navScreen: QuranScreen(chapter: hollyQuraan[index], shaikh: shaikh, index: index,)),
                     separatorBuilder: (context, index) =>
                         SizedBox(height: 10.0,),
                     itemCount: hollyQuraan.length
