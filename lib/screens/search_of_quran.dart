@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quran_app/screens/quran_screen.dart';
 import '../material.dart';
 
+// ignore: must_be_immutable
 class SearchOfQuran extends StatefulWidget {
 
   AlShaikh shaikh;

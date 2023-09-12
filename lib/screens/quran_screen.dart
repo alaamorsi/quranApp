@@ -1,11 +1,10 @@
-// ignore_for_file: sort_child_properties_last, prefer_const_constructors
-
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:quran_app/material.dart';
 import 'package:rxdart/rxdart.dart';
 
+// ignore: must_be_immutable
 class QuranScreen extends StatefulWidget {
   QuranChapter chapter;
   late QuranChapter chapterQ;
@@ -213,7 +212,6 @@ class Controls extends StatelessWidget {
         final playerState = snapshot.data;
         final processingState = playerState?.processingState;
         final playing = playerState?.playing;
-
         if (!(playing ?? false)) {
           return IconButton(
             onPressed: player.play,
