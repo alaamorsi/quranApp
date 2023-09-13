@@ -107,7 +107,7 @@ Widget qaraaItem({required context,required List from,required int index,require
     );
 
 //////////////////////////////////////
-Widget chapterItem({required context,required List from,required int index,required  navScreen})=>
+Widget chapterItem({required context,required List from,required int index,required  navScreen , required bool fav,})=>
     Container(
       height: 50.0,
       decoration: BoxDecoration(
@@ -127,6 +127,7 @@ Widget chapterItem({required context,required List from,required int index,requi
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              if(fav)
               Container(
                 padding: EdgeInsets.all(5.0),
                 decoration: BoxDecoration(

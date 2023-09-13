@@ -3,7 +3,7 @@ import 'package:quran_app/screens/el_quraa.dart';
 import 'package:quran_app/screens/learning.dart';
 import 'package:quran_app/screens/motshabhat.dart';
 import 'package:quran_app/screens/mushaf.dart';
-import 'package:quran_app/screens/questions.dart';
+import 'package:quran_app/screens/rageh_hefzzak/choose_categorey.dart';
 import 'screens/al_azkaar.dart';
 import 'screens/masbaha.dart';
 import 'our_widgets.dart';
@@ -62,7 +62,7 @@ class _FirstScreenState extends State<FirstScreen> {
             SizedBox(height: 20.0,),
             Row(
                 children: [
-                  firstScreenItem(context: context, title: 'راجع حفظك', navTo: Questions(), icon: Icons.book_rounded),
+                  firstScreenItem(context: context, title: 'راجع حفظك', navTo: ChooseCategory(), icon: Icons.book_rounded),
                   SizedBox(width: 20.0,),
                   firstScreenItem(context: context, title: 'تعلم الصلاة', navTo: LearningScreen(), icon: Icons.man_sharp),
                 ]
