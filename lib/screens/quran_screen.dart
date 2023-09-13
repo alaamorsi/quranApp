@@ -58,7 +58,7 @@ class QuranScreenState extends State<QuranScreen> {
               Uri.parse('https://server${shaikhUrl}/${hollyQuraan[index+i].number}.mp3'),
               tag: MediaItem(
                   id: '${justId+1}',
-                  title: '${hollyQuraan[index+i].nameArabic}')
+                  title: ' سورة ${hollyQuraan[index+i].nameArabic}')
           ),
         );
       } else {
@@ -67,7 +67,7 @@ class QuranScreenState extends State<QuranScreen> {
               Uri.parse('https://server${shaikhUrl}/${hollyQuraan[index-(114-i)].number}.mp3'),
               tag: MediaItem(
                   id: '${justId+1}',
-                  title: '${hollyQuraan[index-(114-i)].nameArabic}')
+                  title: ' سورة ${hollyQuraan[index-(114-i)].nameArabic}')
           ),
         );
       }
@@ -99,7 +99,7 @@ class QuranScreenState extends State<QuranScreen> {
         ),
         child: Padding(
           padding: EdgeInsets.only(
-            top: 48.0,
+            top: 30.0,
           ),
           child: Container(
             child: Column(
@@ -115,61 +115,62 @@ class QuranScreenState extends State<QuranScreen> {
                         topLeft: Radius.circular(30.0),
                       ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: ListView(
                       children: [
-                        Container(
-                          width: 500.0,
-                        ),
-                        StreamBuilder<SequenceState?>(
-                            stream: player.sequenceStateStream,
-                            builder: (context, snapshot) {
-                              final state = snapshot.data;
-                              if(state?.sequence.isEmpty ?? true){
-                                return SizedBox();
-                              }
-                              final metadata = state!.currentSource!.tag as MediaItem;
-                              return MediaMetaData(
-                                  image: widget.shaikhQ.image,
-                                  title: metadata.title,
-                                  qara: widget.shaikhQ.name);
-                            }),
-                        SizedBox(height: 20.0,),
-                        StreamBuilder<PositionData>(
-                            stream: positionDataStream,
-                            builder: (context, snapshot) {
-                              final positionData = snapshot.data;
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0),
-                                child: ProgressBar(
-                                  barHeight: 8.0,
-                                  baseBarColor: Colors.white,
-                                  bufferedBarColor: Colors.grey,
-                                  progressBarColor: Colors.blue,
-                                  thumbColor: Colors.blue,
-                                  timeLabelTextStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  progress:
-                                  positionData?.position ?? Duration.zero,
-                                  buffered: positionData?.bufferedPosition ??
-                                      Duration.zero,
-                                  total:
-                                  positionData?.duration ?? Duration.zero,
-                                  onSeek: player.seek,
-                                ),
-                              );
-                            }),
-                        SizedBox(height: 20.0,),
-                        Row(
-                          children: [
-                            Controls(player: player),
-                          ],
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                        )
+                          children: [
+                            StreamBuilder<SequenceState?>(
+                                stream: player.sequenceStateStream,
+                                builder: (context, snapshot) {
+                                  final state = snapshot.data;
+                                  if(state?.sequence.isEmpty ?? true){
+                                    return SizedBox();
+                                  }
+                                  final metadata = state!.currentSource!.tag as MediaItem;
+                                  return MediaMetaData(
+                                      image: widget.shaikhQ.image,
+                                      title: metadata.title,
+                                      qara: widget.shaikhQ.name);
+                                }),
+                            SizedBox(height: 20.0,),
+                            StreamBuilder<PositionData>(
+                                stream: positionDataStream,
+                                builder: (context, snapshot) {
+                                  final positionData = snapshot.data;
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20.0),
+                                    child: ProgressBar(
+                                      barHeight: 8.0,
+                                      baseBarColor: Colors.white,
+                                      bufferedBarColor: Colors.grey,
+                                      progressBarColor: Colors.blue,
+                                      thumbColor: Colors.blue,
+                                      timeLabelTextStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      progress:
+                                      positionData?.position ?? Duration.zero,
+                                      buffered: positionData?.bufferedPosition ??
+                                          Duration.zero,
+                                      total:
+                                      positionData?.duration ?? Duration.zero,
+                                      onSeek: player.seek,
+                                    ),
+                                  );
+                                }),
+                            SizedBox(height: 20.0,),
+                            Row(
+                              children: [
+                                Controls(player: player),
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -223,9 +224,9 @@ class MediaMetaData extends StatelessWidget{
           child: Image(image: AssetImage(image),height: 300,width: 300,fit:BoxFit.cover,),
         ),
       ),
-      SizedBox(height: 20,),
+      SizedBox(height: 10,),
       Text(title,style: TextStyle(color: Colors.white,fontSize: 22),textAlign: TextAlign.center,),
-      SizedBox(height: 20,),
+      SizedBox(height: 10,),
       Text(qara,style: TextStyle(color: Colors.white70,fontSize: 19),textAlign: TextAlign.center,),
     ]
     );

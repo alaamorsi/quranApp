@@ -2,9 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:quran_app/material.dart';
 import 'package:quran_app/our_widgets.dart';
-// import 'package:quran_app/screens/quran_screen.dart';
+import 'package:quran_app/screens/quran_screen.dart';
 import 'package:quran_app/screens/search_of_quran.dart';
-import 'package:quran_app/screens/test.dart';
 
 // ignore: must_be_immutable
 class QuranListView extends StatelessWidget {
@@ -49,7 +48,6 @@ class QuranListView extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) =>
                         chapterItem(context: context, from: hollyQuraan, index: index,
-                            // navScreen: QuranScreen(chapter: hollyQuraan[index], shaikh: shaikh)),
                             navScreen: QuranScreen(chapter: hollyQuraan[index], shaikh: shaikh, index: index,)),
                     separatorBuilder: (context, index) =>
                         SizedBox(height: 10.0,),

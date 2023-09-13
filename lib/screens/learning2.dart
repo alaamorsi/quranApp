@@ -18,16 +18,17 @@ class Learning2Screen extends StatefulWidget {
 class Learning2ScreenState extends State<Learning2Screen> {
 
   List<String> washingImages = [
-    'assets/wash_and_pray/1.jpg',
-    'assets/wash_and_pray/2.jpg',
-    'assets/wash_and_pray/3.jpg',
-    'assets/wash_and_pray/4.jpg',
-    'assets/wash_and_pray/5.jpg',
-    'assets/wash_and_pray/6.jpg',
-    'assets/wash_and_pray/7.jpg',
-    'assets/wash_and_pray/8.jpg',
-    'assets/wash_and_pray/9.jpg',
-    ];
+    'assets/wash_and_pray/a1.jpg',
+    'assets/wash_and_pray/a3.jpg',
+    'assets/wash_and_pray/a4.jpg',
+    'assets/wash_and_pray/a5.jpg',
+    'assets/wash_and_pray/a6.jpg',
+    'assets/wash_and_pray/a7.jpg',
+    'assets/wash_and_pray/a8.jpg',
+    'assets/wash_and_pray/a9.jpg',
+    'assets/wash_and_pray/a10.jpg',
+    'assets/wash_and_pray/a11.jpg',
+  ];
   List<String> prayingImages = [
     'assets/wash_and_pray/10.jpg',
     'assets/wash_and_pray/20.jpg',
@@ -43,15 +44,16 @@ class Learning2ScreenState extends State<Learning2Screen> {
   ];
 
   List<String> washingNotes =[
-    'يُستحب استعمال السواك قبل الوضوء ,اولاً التسمية عند البدأ',
-    'غسل اليدين مع غسل الأصابع جيداً بالماء ثلاث الماء',
-    '...',
-    '...',
-    'تأخذ بكلتا يديك بعض الماء لتغسل وجهك من أقصى الجبهة إلى الذقن ثلاث مرات',
-    'تغسل بيدك اليسري يدك اليمنى من الكف حتى الكوع او اعلى قليلا ( ثلاث مرات ), ثم تغسل يدك اليسرى بنفس الطريقة ثلاث مرات',
-    'مع تخليل (أدخال) الأصابع بين الشعر ',
-    '...',
-    'تغسل من أول الأصابع الى مفصل القدم ثلاثاً مع غسل بين الأصابع جيداً',
+    'تنوي بقلبك الوضوء لأن النية محلها القلب ثم تقول البسملة "بسم الله الرحمن الرحيم" ثم تشرع فى الوضوء',
+    'تغسل يديك جيداً مع تخليل الأصابع (اي يدخل الماء بينها جيداً) ثلاث مرات',
+    'تمضمض ثلاث مرات، والمضمضة هي إدارة الماء في الفم وتحريكه بهدف إزالة بقايا الطعام العالقة في الفم وبين الأسنان ، وإذا أخذت غرفة واحدة بيدك يمكن أنْ تتمضمض بها ثلاث مرات، ومن السنة المبالغة فيه إلا أن كنت صائما حتى لا يصل إلى جوفك شيئا من الماء',
+    'استنشق ثلاث مرات وانثر الماء من أنفك بيدك اليسرى ، والاستنشاق هو إيصال الماء إلى داخل الأنف ، والاستنثار هو إخراجه من الأنف، والهدف منه تنظيف الأنف. و أيضاً من السنة المبالغة فيه إلا أن تكون صائما لئلا يصل إلى جوفك شيئا من الماء',
+    'املأ كفيك بالماء واغسل بهما وجهك كله جيدا من منابت شعر الرأس إلى ما انحدر من اللحيين والذقن ، طولاً ، ومن حدّ الأذن اليمنى إلى حد الأذن اليسرى عرضا ثلاث مرات',
+    'اغسل يديك مع المرفقين (الكوع)، ليس إلى المرفقين بل مع غسل المرفقين ، ويجب أن يصل الماء إليه ويتجاوزه قليلا،وحَدُّ اليد من رؤوس الأصابع مع الأظافر إلى أول العضد اليد اليمنى ثلاث مرات ثم اليسرى ثلاثأ',
+    'الرأس يمسح ولا يغسل، وصفة مسح الرأس أن تضع يديك مبلولتين بالماء على مقدم رأسك وتمررهما إلى قفاك ثم تردهما إلى الموضع الذي بدأت منه مرة واحدة',
+    'امسح الأذنين ولو بماء الرأس، فهذا ممكن، أن تمسح الأذنين بماء الرأس نفسه، أدخل أصبعيك السبابتين في فتحتي أذنيك، وامسح ظاهرهما بإبهاميك ومررها بتجاويفها، ثم ظاهر الأذن والرقبة',
+    'اغسل رجليك ثلاث مرات بالماء جيدا إلى الكعبين واستوعب المكان كله بالغسل، والكعبان هما العظمان الناتئان في أسفل الساقً',
+    'ثم عند الإنتهاء تقول " أشهد أن لا إله إلا الله وحده لا شريك له وأشهد أن محمداً عبده ورسوله" وتنصرف لأداء الصلاة'
   ];
   List<String> prayingNotes =[
     'النية محلها القلب, لا يشترط القول باللسان',
@@ -143,34 +145,37 @@ class Learning2ScreenState extends State<Learning2Screen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(onPressed: (){
-                      if(plus > 0){
-                        setState(() {
-                          plus -=1;
-                        });
-                      }
-                      else
-                      {
-                        setState(() {
-                          plus = learn.length-1;
-                        });
-                      }
-                    }, icon: Icon(Icons.arrow_circle_left,size: 70,color: Colors.white70,)),
+                    InkWell(
+                        onTap: (){
+                          if(plus > 0){
+                            setState(() {
+                              plus -=1;
+                            });
+                          }
+                          else
+                          {
+                            setState(() {
+                              plus = learn.length-1;
+                            });
+                          }
+                        },
+                        child: Icon(Icons.arrow_circle_left,size: 70,color: Colors.white70,)),
                     SizedBox(width: 50.0,),
-                    IconButton(onPressed: (){
-                      if(plus < learn.length-1){
-                        setState(() {
-                          plus +=1;
-                        });
-                      }
-                      else
-                      {
-                        setState(() {
-                          plus = 0;
-                        });
-                      }
-                    }, icon: Icon(Icons.arrow_circle_right,size: 70,color: Colors.white70,)),
-                    SizedBox(width: 30.0,),
+                    InkWell(
+                        onTap: (){
+                          if(plus < learn.length-1){
+                            setState(() {
+                              plus +=1;
+                            });
+                          }
+                          else
+                          {
+                            setState(() {
+                              plus = 0;
+                            });
+                          }
+                        },
+                        child: Icon(Icons.arrow_circle_right,size: 70,color: Colors.white70,)),
                   ]
                 ),
                 SizedBox(height: 30.0,),
