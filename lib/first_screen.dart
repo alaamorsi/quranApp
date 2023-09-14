@@ -60,6 +60,7 @@ class _FirstScreenState extends State<FirstScreen> {
               ),
             SizedBox(height: 20.0,),
             Row(
+              //new
                 children: [
                   firstScreenItem(context: context, title: 'تعلم الوضوء', navTo: Learning2Screen(title: 'تعلم الوضوء'), icon: Icons.book_rounded),
                   SizedBox(width: 20.0,),
